@@ -137,7 +137,7 @@ function App() {
                         <div className="block sm:max-w-screen-sm px-">
                             <h1 className="text-teal-400 text-xm underline underline-offset-4 pb-3 sm:text-lg sm:text-red-500">About Section</h1>
                             <p className="max-w-xs text-xs text-pretty truncate text-slate-400">I am a student in Cebu Institute of Technology currently studying Bachelor of Science in Information
-                            Technology asbdhabsjdbahdbsahjbdjhasbdjhabsjhdbsabdjsdsadhaudhsauhduahsdsdss</p>
+                            Technology asbdhabsjdbahdbsahjbdjhasbdjhabsjhdbsabdjsdsadhaudhsauhduahsdsdsss</p>
                         </div>
                     </section>
                 </div>

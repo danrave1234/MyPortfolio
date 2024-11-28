@@ -1,0 +1,60 @@
+.underline-effect {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px;
+    transition: color 0.3s ease;
+}
+
+.underline-effect::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease, left 0.3s ease;
+;
+}
+
+.underline-effect:hover::after,
+.underline-effect.active::after {
+    width: 100%;
+    left: 0;
+}
+
+.underline-effect.active {
+    @apply text-teal-400;
+}
+
+body:hover .cursor-glow {
+    opacity: 0.3;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%) scale(1.2); /* Slight zoom effect on hover */
+}
+
+body:active .cursor-glow {
+    opacity: 0.4;
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%) scale(1.1); /* Slight zoom effect on click */
+}
+
+.cursor-glow {
+    position: fixed;
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    pointer-events: none; /* Ensure it does not block user interactions */
+    box-shadow: 0 0 500px rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, opacity 0.3s ease; /* Smooth animation */
+    opacity: 0; /* Hidden by default */
+    z-index: 1000; /* Reduced to avoid excessive stacking */
+}
+
+@media (max-width: 640px) {
+    .cursor-glow {
+        width: 10rem;
+        height: 10rem;
+    }
+}

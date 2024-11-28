@@ -1,0 +1,15 @@
+:root {
+    font-size: 16px;
+    line-height: 1.5;
+    color-scheme: light dark;
+    /*color: rgba(255, 255, 255, 0.87);*/
+    background-color: #0A1741;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

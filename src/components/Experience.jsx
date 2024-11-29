@@ -1,18 +1,28 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import html from '../assets/html.svg';
+import css from '../assets/css.svg';
+import javascript from '../assets/javascript.svg';
+import react from '../assets/react.svg';
+import python from '../assets/python.svg';
+import java from '../assets/java.svg';
+import cpp from '../assets/cpp3.svg';
+import mysql from '../assets/mysql.svg';
+import github from '../assets/github.svg';
+import vite from '../assets/vite.svg';
 
 const icons = [
-    { src: 'src/assets/html.svg', alt: 'HTML', thought: 'HTML is the backbone of web development!' },
-    { src: 'src/assets/css.svg', alt: 'CSS', thought: 'CSS makes everything beautiful!' },
-    { src: 'src/assets/javascript.svg', alt: 'JavaScript', thought: 'JavaScript brings websites to life!' },
-    { src: 'src/assets/react.svg', alt: 'React', thought: 'React makes building UIs a breeze!' },
-    { src: 'src/assets/python.svg', alt: 'Python', thought: 'Python is great for backend and data analysis!' },
-    { src: 'src/assets/java.svg', alt: 'Java', thought: 'Java is powerful for enterprise applications!' },
-    { src: 'src/assets/cpp3.svg', alt: 'C++', thought: 'C++ is fast and efficient!' },
-    { src: 'src/assets/mysql.svg', alt: 'MySQL', thought: 'MySQL helps manage data effectively!' },
-    { src: 'src/assets/github.svg', alt: 'GitHub', thought: 'GitHub is essential for collaboration!' },
-    { src: 'src/assets/vite.svg', alt: 'Vite', thought: 'Vite makes development super fast!' },
+    { src: html, alt: 'HTML', thought: 'HTML is the backbone of web development!' },
+    { src: css, alt: 'CSS', thought: 'CSS makes everything beautiful!' },
+    { src: javascript, alt: 'JavaScript', thought: 'JavaScript brings websites to life!' },
+    { src: react, alt: 'React', thought: 'React makes building UIs a breeze!' },
+    { src: python, alt: 'Python', thought: 'Python is great for backend and data analysis!' },
+    { src: java, alt: 'Java', thought: 'Java is powerful for enterprise applications!' },
+    { src: cpp, alt: 'C++', thought: 'C++ is fast and efficient!' },
+    { src: mysql, alt: 'MySQL', thought: 'MySQL helps manage data effectively!' },
+    { src: github, alt: 'GitHub', thought: 'GitHub is essential for collaboration!' },
+    { src: vite, alt: 'Vite', thought: 'Vite makes development super fast!' },
 ];
 
 function Experience() {

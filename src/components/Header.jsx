@@ -14,8 +14,16 @@ function Header({ activeSection }) {
         { href: '#contact', label: 'Contact Me' },
     ];
 
+    const handleNavClick = (e, href) => {
+        e.preventDefault();
+        const element = document.querySelector(href);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
-        <header className="flex h-15 p-7 items-center justify-between fixed top-0 left-0 right-0 z-50 bg-[#0A1741]/80 backdrop-blur-sm">
+        <header className="flex h-15 p-7 items-center justify-between fixed top-0 left-0 right-0 z-50">
             <img src={dotaIcon} alt="GG" className="h-10 w-10 object-contain" />
             <nav className="flex">
                 <ul className="hidden sm:flex space-x-10 items-center">
@@ -26,6 +34,7 @@ function Header({ activeSection }) {
                                 className={`cursor-pointer underline-effect hover:text-teal-500 transition-all ease-linear duration-300 ${
                                     activeSection === item.href.slice(1) ? 'active' : ''
                                 }`}
+                                onClick={(e) => handleNavClick(e, item.href)}
                             >
                                 {item.label}
                             </a>
@@ -44,7 +53,7 @@ function Header({ activeSection }) {
                 </ul>
             </nav>
             <div className="sm:hidden">
-                <Dropdown isOpen={isMenuOpen} toggleMenu={toggleMenu} activeSection={activeSection} />
+                <Dropdown isOpen={isMenuOpen} toggleMenu={toggleMenu} activeSection={activeSection} handleNavClick={handleNavClick} />
             </div>
         </header>
     );

@@ -97,3 +97,8 @@ body:active .cursor-glow {
     animation-delay: 1.5s;
 }
 
+html {
+    scroll-behavior: smooth;
+    overflow: hidden;
+}
+

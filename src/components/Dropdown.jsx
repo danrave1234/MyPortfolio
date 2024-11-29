@@ -2,7 +2,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Fragment } from 'react';
 
-function Dropdown({ isOpen, toggleMenu, activeSection }) {
+function Dropdown({ isOpen, toggleMenu, activeSection, handleNavClick }) {
     const menuItems = [
         { href: '#about', label: 'About' },
         { href: '#experience', label: 'Experience' },
@@ -43,12 +43,15 @@ function Dropdown({ isOpen, toggleMenu, activeSection }) {
                                                 ? 'bg-gray-700 text-white'
                                                 : 'text-gray-200'
                                         }`}
-                                        onClick={toggleMenu}
+                                        onClick={(e) => {
+                                            handleNavClick(e, item.href);
+                                            toggleMenu();
+                                        }}
                                     >
-                    <span className="group flex items-center w-fit">
-                      <span className="nav-indicator mr-4 h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200 motion-reduce:transition-none"></span>
-                        {item.label}
-                    </span>
+                                        <span className="group flex items-center w-fit">
+                                            <span className="nav-indicator mr-4 h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200 motion-reduce:transition-none"></span>
+                                            {item.label}
+                                        </span>
                                     </a>
                                 )}
                             </Menu.Item>

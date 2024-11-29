@@ -1,3 +1,17 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+    font-size: 16px;
+    line-height: 1.5;
+    color-scheme: dark;
+    background-color: #0A1741;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+
 .underline-effect {
     position: relative;
     display: inline-block;
@@ -14,7 +28,6 @@
     height: 2px;
     background-color: currentColor;
     transition: width 0.3s ease, left 0.3s ease;
-;
 }
 
 .underline-effect:hover::after,
@@ -27,29 +40,29 @@
     @apply text-teal-400;
 }
 
-body:hover .cursor-glow {
-    opacity: 0.3;
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translate(-50%, -50%) scale(1.2); /* Slight zoom effect on hover */
-}
-
-body:active .cursor-glow {
-    opacity: 0.4;
-    background-color: rgba(255, 255, 255, 0.5);
-    transform: translate(-50%, -50%) scale(1.1); /* Slight zoom effect on click */
-}
-
 .cursor-glow {
     position: fixed;
     width: 20rem;
     height: 20rem;
     border-radius: 50%;
-    pointer-events: none; /* Ensure it does not block user interactions */
+    pointer-events: none;
     box-shadow: 0 0 500px rgba(255, 255, 255, 0.5);
     transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, opacity 0.3s ease; /* Smooth animation */
-    opacity: 0; /* Hidden by default */
-    z-index: 1000; /* Reduced to avoid excessive stacking */
+    transition: transform 0.1s ease, opacity 0.3s ease;
+    opacity: 0;
+    z-index: 1000;
+}
+
+body:hover .cursor-glow {
+    opacity: 0.3;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+body:active .cursor-glow {
+    opacity: 0.4;
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%) scale(1.1);
 }
 
 @media (max-width: 640px) {
@@ -58,3 +71,29 @@ body:active .cursor-glow {
         height: 10rem;
     }
 }
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-icons img {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-icons img:nth-child(odd) {
+    animation-delay: 0.5s;
+}
+
+.animate-icons img:nth-child(3n) {
+    animation-delay: 1s;
+}
+
+.animate-icons img:nth-child(3n+1) {
+    animation-delay: 1.5s;
+}
+

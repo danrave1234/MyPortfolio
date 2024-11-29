@@ -68,7 +68,7 @@ function Experience() {
     return (
         <section
             id="experience"
-            className="snap-start min-h-screen flex flex-col items-center justify-center px-4 sm:px-20 relative overflow-hidden bg-gradient-to-b from-[#0A1741] to-[#0f2057]"
+            className="snap-start min-h-screen flex flex-col items-center justify-center px-4 sm:px-20 relative overflow-hidden "
             ref={constraintsRef}
         >
             <h2 className="text-2xl font-bold text-teal-400 mb-16">Experience</h2>

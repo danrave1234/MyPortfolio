@@ -1,14 +1,13 @@
 
 import { motion } from 'framer-motion';
-import React from "react";
 
 function Projects() {
     const projects = [
         {
-            title: "E-commerce Platform",
-            description: "A full-stack e-commerce solution built with Next.js, Node.js, and MongoDB.",
-            technologies: ["React", "Next.js", "Node.js", "MongoDB", "Tailwind CSS"],
-            link: "https://github.com/yourusername/ecommerce-platform"
+            title: "E-commerce Platform: Bytemarket",
+            description: "A full-stack e-commerce solution built with React.js and Spring Boot.",
+            technologies: ["React", "Tailwind CSS", "Spring Boot", "MySQL"],
+            link: "https://github.com/danrave1234/APPDEV_Bytemarket"
         },
         {
             title: "Task Management App",

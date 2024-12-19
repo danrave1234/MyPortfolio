@@ -46,7 +46,7 @@ function Header({ activeSection }) {
                         <a
                             href="/Resume.pdf" // Path to the PDF in the public folder
                             className="border border-teal-400 font-semibold text-teal-300 bg-teal-400/10 py-1 px-2 rounded hover:bg-teal-400/20 transition-colors duration-300"
-                            download="My_Resume.pdf" // File name for the downloaded PDF
+                            download="Resume.pdf" // File name for the downloaded PDF
                         >
                             Resume
                         </a>

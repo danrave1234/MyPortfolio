@@ -1,17 +1,37 @@
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 
-function Dropdown({ toggleMenu, activeSection, handleNavClick }) {
+function Dropdown({ toggleMenu, handleNavClick }) {
+    const [activeSection, setActiveSection] = useState('');
     const menuItems = [
         { href: '#about', label: 'About' },
         { href: '#experience', label: 'Experience' },
         { href: '#projects', label: 'Projects' },
         { href: '#contact', label: 'Contact Me' },
+        { href: '/Resume.pdf', label: 'Download Resume', isDownload: true },
     ];
+    useEffect(() => {
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveSection(entry.target.id);
+                    }
+                });
+            },
+            { threshold: 0.2 } // Adjust threshold for when a section is considered "active"
+        );
 
+        sections.forEach((section) => observer.observe(section));
+
+        return () => {
+            sections.forEach((section) => observer.unobserve(section));
+        };
+    }, []);
     // Get label for the current active section
     const getCurrentLabel = () => {
         const currentItem = menuItems.find((item) => item.href.slice(1) === activeSection);
@@ -46,13 +66,16 @@ function Dropdown({ toggleMenu, activeSection, handleNavClick }) {
                                 {({ active }) => (
                                     <a
                                         href={item.href}
+                                        download={item.isDownload || false}
                                         className={`flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200 ${
                                             active || activeSection === item.href.slice(1)
                                                 ? 'bg-teal-400 text-gray-900'
                                                 : 'text-gray-300 hover:bg-teal-500 hover:text-white'
                                         }`}
                                         onClick={(e) => {
-                                            handleNavClick(e, item.href);
+                                            if (!item.isDownload) {
+                                                handleNavClick(e, item.href); // Only navigate for non-download links
+                                            }
                                             toggleMenu();
                                         }}
                                     >
@@ -76,9 +99,7 @@ function Dropdown({ toggleMenu, activeSection, handleNavClick }) {
 }
 
 Dropdown.propTypes = {
-
     toggleMenu: PropTypes.func.isRequired,
-    activeSection: PropTypes.string.isRequired,
     handleNavClick: PropTypes.func.isRequired,
 };
 

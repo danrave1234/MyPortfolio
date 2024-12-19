@@ -1,5 +1,6 @@
 
 import { motion } from 'framer-motion';
+import bytemarketImg from '../assets/me.png';
 
 function Projects() {
     const projects = [
@@ -7,7 +8,8 @@ function Projects() {
             title: "E-commerce Platform: Bytemarket",
             description: "A full-stack e-commerce solution built with React.js and Spring Boot.",
             technologies: ["React", "Tailwind CSS", "Spring Boot", "MySQL"],
-            link: "https://github.com/danrave1234/APPDEV_Bytemarket"
+            link: "https://github.com/danrave1234/APPDEV_Bytemarket",
+            image: bytemarketImg
         },
         {
             title: "Task Management App",
@@ -60,7 +62,7 @@ return (
                         className="transform transition-transform bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl"
                     >
                         <img
-                            src="https://via.placeholder.com/300"
+                            src={project.image}
                             alt={`${project.title} Preview`}
                             className="w-full h-48 object-cover"
                         />

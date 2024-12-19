@@ -48,7 +48,7 @@ function App() {
 
     return (
         <div className=" text-white min-h-screen ">
-            <div className="cursor-glow" aria-hidden="true"></div>
+            <div className="cursor-glow hidden sm:block" aria-hidden="true"></div>
             <div className="invisible sm:visible text-slate-50 text-sm fixed bottom-20 right-1 transform rotate-90 subpixel-antialiased">
                 <p>danravekeh123@gmail.com</p>
             </div>
@@ -60,11 +60,11 @@ function App() {
                             <div className="sm:w-fit">
                                 <p className="text-sm text-teal-300 pb-1 sm:pb-2 sm:text-md lg:text-lg">Hi! My name is</p>
                                 <h1 className="text-2xl sm:text-3xl font-bold sm:pb-1 md:text-4xl lg:text-4xl xl:text-5xl">Danrave C. Keh</h1>
-                                <p className="text-xl text-slate-300 w-fit font-semibold sm:text-xl md:text-2xl pb-3 lg:text-3xl">I'm a FullStack Developer</p>
+                                <p className="text-xl text-slate-300 w-fit font-semibold sm:text-xl md:text-2xl pb-3 lg:text-3xl">I&apos;m a FullStack Developer</p>
                                 <p className="text-xs max-w-xs text-slate-400 sm:pt-2 sm:text-sm md:text-md lg:text-2md xl:text-lg xl:max-w-md">
-                                    I'm an Information Technology Student. I specialize in developing backend for websites
+                                    I&apos;m an Information Technology Student. I specialize in developing backend for websites
                                     and applications on the projects I worked on and occasionally do some frontend design.
-                                    Currently, I'm learning more about the backend and frontend.
+                                    Currently, I&apos;m learning more about the backend and frontend.
                                 </p>
                             </div>
                         </div>

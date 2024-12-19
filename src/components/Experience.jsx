@@ -30,85 +30,66 @@ function Experience() {
 
     const containerVariants = {
         hidden: {},
-        visible: {
-            transition: {
-                staggerChildren: 0.2
-            }
-        }
+        visible: { transition: { staggerChildren: 0.2 } },
     };
 
     const iconVariants = {
-        hidden: {
-            x: -100,
-            opacity: 0,
-            scale: 0.8
-        },
+        hidden: { opacity: 0, scale: 0.8, y: 60 },
         visible: {
-            x: 0,
             opacity: 1,
             scale: 1,
-            transition: {
-                type: "spring",
-                stiffness: 100,
-                damping: 10
-            }
-        }
-    };
-
-    const floatingAnimation = {
-        y: [-5, 5],
-        transition: {
-            duration: 2,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut"
-        }
+            y: 0,
+            transition: { type: 'spring', stiffness: 100, damping: 15 },
+        },
     };
 
     return (
         <section
             id="experience"
-            className="snap-start min-h-screen flex flex-col items-center justify-center px-4 sm:px-20 relative overflow-hidden "
+            className="snap-start min-h-screen flex flex-col items-center justify-center px-6 sm:px-10 relative overflow-hidden pt-16"
             ref={constraintsRef}
         >
-            <h2 className="text-2xl font-bold text-teal-400 mb-16">Experience</h2>
+            <h2 className="text-3xl font-bold text-teal-400 mb-10">Experience</h2>
 
+            {/* Icon Grid */}
             <motion.div
-                className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-12 gap-y-16 relative z-10 max-w-6xl mx-auto"
-                variants={containerVariants}
+                className="grid grid-cols-3 gap-6 sm:grid-cols-4 sm:gap-8 relative z-10 max-w-lg sm:max-w-xl lg:max-w-2xl"
+                variants={containerVariants} // Container animations
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
+                viewport={{once: true, amount: 0.3}}
             >
-                {icons.map((icon, index) => (
+                {icons.map((icon) => (
                     <motion.div
                         key={icon.alt}
-                        className="relative flex items-center justify-center group"
-                        variants={iconVariants}
-                        whileHover={{ scale: 1.2 }}
-                        animate={floatingAnimation}
+                        className="group relative flex items-center justify-center cursor-pointer"
+                        variants={iconVariants} // Icon entry animations
                         drag
-                        dragConstraints={constraintsRef}
-                        dragElastic={0.1}
+                        dragConstraints={constraintsRef} // Prevents dragging out of bounds
+                        dragElastic={0.1} // Slight drag elasticity
                     >
-                        <div className="absolute inset-0 bg-teal-400/20 rounded-full filter blur-xl scale-75 group-hover:scale-100 transition-transform duration-300" />
+                        {/* Glowing Background */}
+                        <div
+                            className="absolute inset-0 bg-teal-400/20 rounded-full blur-lg transform scale-90 group-hover:scale-110 transition-transform duration-200"/>
+
+                        {/* Icon */}
                         <img
                             src={icon.src}
                             alt={icon.alt}
-                            className="w-16 h-16 relative z-10 drop-shadow-[0_0_10px_rgba(20,184,166,0.3)] group-hover:drop-shadow-[0_0_20px_rgba(20,184,166,0.5)] transition-all duration-300"
-                            onMouseEnter={() => setHoveredIcon(icon.alt)}
+                            className="w-16 h-16 z-10 drop-shadow-[0_0_10px_rgba(20,184,166,0.3)] group-hover:drop-shadow-[0_0_20px_rgba(20,184,166,0.5)] transition-all duration-300"
+                            onMouseEnter={() => setHoveredIcon(icon.alt)} // Tooltip interaction for desktop
                             onMouseLeave={() => setHoveredIcon(null)}
                         />
+
+                        {/* Tooltip */}
                         <AnimatePresence>
                             {hoveredIcon === icon.alt && (
                                 <motion.div
-                                    className="absolute -top-24 left-1/2 transform -translate-x-1/2 bg-gray-800/90 text-white p-4 rounded-xl text-sm min-w-[200px] max-w-[250px] text-center"
-                                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                                    transition={{ duration: 0.2 }}
+                                    className="absolute top-20 bg-gray-800/90 text-white px-3 py-2 rounded-md shadow-lg text-sm max-w-[150px] transition-all duration-200 z-20"
+                                    initial={{opacity: 0, y: 10, scale: 0.95}}
+                                    animate={{opacity: 1, y: 0, scale: 1}}
+                                    exit={{opacity: 0, y: 10, scale: 0.95}}
                                 >
-                                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gray-800/90 rotate-45" />
                                     {icon.thought}
                                 </motion.div>
                             )}
@@ -117,28 +98,20 @@ function Experience() {
                 ))}
             </motion.div>
 
+            {/* Description */}
             <motion.div
-                className="mt-20 max-w-3xl text-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
+                className="mt-12 max-w-lg sm:max-w-2xl text-center text-slate-300"
+                initial={{opacity: 0, y: 20}}
+                whileInView={{opacity: 1, y: 0}}
+                viewport={{once: true}}
+                transition={{delay: 0.5}}
             >
-                {/*<h3 className="text-xl font-semibold text-teal-300 mb-4">Work Experience</h3>*/}
-                {/*<div className="bg-gray-800/50 p-6 rounded-lg">*/}
-                {/*    <p className="text-slate-300 mb-4">*/}
-                {/*        [Placeholder for Work Experience]*/}
-                {/*    </p>*/}
-                {/*    <p className="text-slate-400 text-sm italic">*/}
-                {/*        Add your work experience details here. Include job titles, companies, dates, and key responsibilities.*/}
-                {/*    </p>*/}
-                {/*</div>*/}
-                <p className="text-slate-300 mt-8 mb-4">
-                    With a strong foundation in both frontend and backend technologies, I enjoy the challenge of building
-                    full-stack applications. Im constantly learning and exploring new technologies to stay at the forefront
-                    of web development.
-                    My experience spans across various programming languages and frameworks, allowing me to tackle diverse
-                    projects and adapt to different tech stacks efficiently.
+                <p>
+                    With a strong foundation in frontend and backend technologies, I enjoy the challenge of building
+                    full-stack web
+                    applications. My experience spans a wide range of programming languages and frameworks, enabling me
+                    to tackle
+                    diverse projects efficiently.
                 </p>
             </motion.div>
         </section>
@@ -146,4 +119,3 @@ function Experience() {
 }
 
 export default Experience;
-

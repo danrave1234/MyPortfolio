@@ -9,11 +9,11 @@ function About() {
                 </p>
                 <p className="text-slate-300 mb-4">
                     With a strong foundation in both frontend and backend technologies, I enjoy the challenge of building
-                    full-stack applications. I'm constantly learning and exploring new technologies to stay at the forefront
+                    full-stack applications. I&apos;m constantly learning and exploring new technologies to stay at the forefront
                     of web development.
                 </p>
                 <p className="text-slate-300">
-                    When I'm not coding, you can find me exploring new coding challenges, contributing to open-source projects,
+                    When I&apos;m not coding, you can find me exploring new coding challenges, contributing to open-source projects,
                     or enjoying a good book on software architecture and design patterns.
                 </p>
             </div>

@@ -4,7 +4,7 @@ function Contact() {
             <div className="max-w-3xl text-center">
                 <h2 className="text-2xl font-bold text-teal-400 mb-6">Get In Touch</h2>
                 <p className="text-slate-300 mb-6">
-                    I'm always open to new opportunities and collaborations. Whether you have a question or just want to say hi, feel free to reach out!
+                    I&apos;m always open to new opportunities and collaborations. Whether you have a question or just want to say hi, feel free to reach out!
                 </p>
                 <a
                     href="mailto:danravekeh123@gmail.com"

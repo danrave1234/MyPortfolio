@@ -2,6 +2,8 @@ import { useState } from 'react';
 import dotaIcon from '../assets/dotaicon.png';
 import Dropdown from "./Dropdown";
 
+import PropTypes from 'prop-types';
+
 function Header({ activeSection }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -58,6 +60,10 @@ function Header({ activeSection }) {
         </header>
     );
 }
+
+Header.propTypes = {
+    activeSection: PropTypes.string.isRequired,
+};
 
 export default Header;
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import dotaIcon from '../assets/dotaicon.png';
+import logo from '../assets/Logo.svg';
 import Dropdown from "./Dropdown";
 
 import PropTypes from 'prop-types';
@@ -26,7 +26,7 @@ function Header({ activeSection }) {
 
     return (
         <header className="flex h-15 p-7 items-center justify-between fixed top-0 left-0 right-0 z-50">
-            <img src={dotaIcon} alt="GG" className="h-10 w-10 object-contain" />
+            <img src={logo} alt="GG" className="h-10 w-10 object-contain" />
             <nav className="flex">
                 <ul className="hidden sm:flex space-x-10 items-center">
                     {navItems.map((item) => (

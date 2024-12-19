@@ -15,7 +15,7 @@ function App() {
         const observerOptions = {
             root: null,
             threshold: 0.5,
-            rootMargin: '-80px 0px -80px 0px', // Adjust this value based on your header height
+rootMargin: '-100px 0px 0px 0px', // Adjust this value based on your header height
         };
 
         const observerCallback = (entries) => {
@@ -47,7 +47,7 @@ function App() {
     }, []);
 
     return (
-        <div className=" text-white min-h-screen ">
+        <div className="text-white min-h-screen relative overflow-hidden">
             <div className="cursor-glow hidden sm:block" aria-hidden="true"></div>
             <div className="invisible sm:visible text-slate-50 text-sm fixed bottom-20 right-1 transform rotate-90 subpixel-antialiased">
                 <p>danravekeh123@gmail.com</p>
@@ -72,11 +72,15 @@ function App() {
                             <img src={me} alt="Danrave C. Keh" className="h-fit w-screen object-contain border-teal-400 border rounded-2xl sm:scale-75 md: 2xl:scale-50" />
                         </div>
                     </section>
-                    <About />
-                    <Experience />
-                    <Projects />
-                    <Contact />
-                    <Footer />
+                    <div className="relative z-10">
+                        <About />
+                        <Experience />
+                        <section id="projects" className="snap-start px-3 sm:px-6 py-10 sm:py-16 relative z-10">
+                            <Projects />
+                        </section>
+                        <Contact />
+                        <Footer />
+                    </div>
                 </div>
             </main>
         </div>

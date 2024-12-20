@@ -79,6 +79,7 @@ function Experience() {
                             className="w-16 h-16 z-10 drop-shadow-[0_0_10px_rgba(20,184,166,0.3)] group-hover:drop-shadow-[0_0_20px_rgba(20,184,166,0.5)] transition-all duration-300"
                             onMouseEnter={() => setHoveredIcon(icon.alt)} // Tooltip interaction for desktop
                             onMouseLeave={() => setHoveredIcon(null)}
+                            onDragStart={(e) => e.preventDefault()} // Prevent browser drag behavior on the image
                         />
 
                         {/* Tooltip */}

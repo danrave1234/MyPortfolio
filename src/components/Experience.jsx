@@ -53,7 +53,7 @@ function Experience() {
 
             {/* Icon Grid */}
             <motion.div
-                className="grid grid-cols-3 gap-6 sm:grid-cols-4 sm:gap-8 relative z-10 max-w-lg sm:max-w-xl lg:max-w-2xl"
+                className="grid grid-cols-3 gap-6 sm:grid-cols-4 sm:gap-8 relative z-20 max-w-lg sm:max-w-xl lg:max-w-2xl"
                 variants={containerVariants} // Container animations
                 initial="hidden"
                 whileInView="visible"
@@ -70,7 +70,8 @@ function Experience() {
                     >
                         {/* Glowing Background */}
                         <div
-                            className="absolute inset-0 bg-teal-400/20 rounded-full blur-lg transform scale-90 group-hover:scale-110 transition-transform duration-200"/>
+                            className="absolute inset-0 bg-teal-400/20 rounded-full blur-lg transform scale-90 group-hover:scale-110 transition-transform duration-200"
+                        />
 
                         {/* Icon */}
                         <img
@@ -97,23 +98,6 @@ function Experience() {
                         </AnimatePresence>
                     </motion.div>
                 ))}
-            </motion.div>
-
-            {/* Description */}
-            <motion.div
-                className="mt-12 max-w-lg sm:max-w-2xl text-center text-slate-300"
-                initial={{opacity: 0, y: 20}}
-                whileInView={{opacity: 1, y: 0}}
-                viewport={{once: true}}
-                transition={{delay: 0.5}}
-            >
-                <p>
-                    With a strong foundation in frontend and backend technologies, I enjoy the challenge of building
-                    full-stack web
-                    applications. My experience spans a wide range of programming languages and frameworks, enabling me
-                    to tackle
-                    diverse projects efficiently.
-                </p>
             </motion.div>
         </section>
     );

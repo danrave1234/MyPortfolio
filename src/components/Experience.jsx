@@ -83,7 +83,7 @@ function Experience() {
                             onDragStart={(e) => e.preventDefault()} // Prevent browser drag behavior on the image
                         />
 
-                        {/* Tooltip */}
+                        {/* Tooltipdasdada */}
                         <AnimatePresence>
                             {hoveredIcon === icon.alt && (
                                 <motion.div

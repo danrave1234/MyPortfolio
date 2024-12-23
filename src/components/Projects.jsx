@@ -1,11 +1,30 @@
 import Slider from "react-slick";
 import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
-import bytemarketImg1 from "../assets/me.png";
+import bytemarketImg1 from "../assets/ByteMarket1.jpg";
+import bytemarketImg2 from "../assets/ByteMarket2.jpg";
+import bytemarketImg3 from "../assets/ByteMarket3.jpg";
+import bytemarketImg4 from "../assets/ByteMarket4.jpg";
+import bytemarketImg5 from "../assets/ByteMarket5.jpg";
+import bytemarketImg6 from "../assets/ByteMarket6.jpg";
+import bytemarketImg7 from "../assets/ByteMarket7.jpg";
+import bytemarketImg8 from "../assets/ByteMarket8.jpg";
+import bytemarketImg9 from "../assets/ByteMarket9.jpg";
+import bytemarketImg10 from "../assets/ByteMarket10.jpg";
+import bytemarketImg11 from "../assets/ByteMarket11.jpg";
+
 import lostAndFoundImg1 from "../assets/Lost&FoundSystem1.jpg";
 import lostAndFoundImg2 from "../assets/Lost&FoundSystem2.jpg";
 import lostAndFoundImg3 from "../assets/Lost&FoundSystem3.jpg";
 import lostAndFoundImg4 from "../assets/Lost&FoundSystem4.jpg";
+import RuinedLightImg1 from "../assets/RuinedLight1.jpg";
+import RuinedLightImg2 from "../assets/RuinedLight2.jpg";
+import RuinedLightImg3 from "../assets/RuinedLight3.jpg";
+import RuinedLightImg4 from "../assets/RuinedLight4.jpg";
+import RuinedLightImg5 from "../assets/RuinedLight5.jpg";
+import RuinedLightImg6 from "../assets/RuinedLight6.jpg";
+import RuinedLightImg7 from "../assets/RuinedLight7.jpg";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -15,22 +34,22 @@ function Projects() {
             title: "E-commerce Platform: Bytemarket",
             description: "A full-stack e-commerce solution built with React.js and Spring Boot.",
             technologies: ["React", "Tailwind CSS", "Spring Boot", "MySQL"],
-            images: [bytemarketImg1, bytemarketImg1],
+            images: [bytemarketImg1, bytemarketImg2, bytemarketImg3, bytemarketImg4, bytemarketImg5, bytemarketImg6, bytemarketImg7, bytemarketImg8, bytemarketImg9, bytemarketImg10, bytemarketImg11],
             link: "https://github.com/danrave1234/APPDEV_Bytemarket",
         },
         {
             title: "Lost & Found System in CIT-U",
             description: "A web-based solution aimed at efficiently managing lost and found items within CIT-U, built for streamlined task handling and responsive design.",
             technologies: ["Python", "SQLite"],
-            images: [lostAndFoundImg1, lostAndFoundImg2, lostAndFoundImg3, lostAndFoundImg4], // Replace with actual images
+            images: [lostAndFoundImg1, lostAndFoundImg2, lostAndFoundImg3, lostAndFoundImg4],
             link: "https://github.com/danrave1234/ProjectDevelopment-in-IM2",
         },
         {
-            title: "Task Management App",
-            description: "A responsive web application for managing tasks and projects, featuring real-time updates.",
-            technologies: ["React", "Firebase", "Material-UI"],
-            images: [bytemarketImg1, bytemarketImg1], // Replace with actual images
-            link: "https://github.com/yourusername/task-management-app",
+            title: "Ruined Light! : A Text Turn-Based RPG Game",
+            description: "A text-based RPG game built in Java, with a focus on OOP. Inspired by the gameplay of Axie Infinity.",
+            technologies: ["Java"],
+            images: [ RuinedLightImg1, RuinedLightImg2, RuinedLightImg3, RuinedLightImg4, RuinedLightImg5,RuinedLightImg6,RuinedLightImg7],
+            link: "https://github.com/danrave1234/Ruined_Light_OOP1_PROJECT",
         },
     ];
 
@@ -43,7 +62,7 @@ function Projects() {
         justifyContent: "center",
         alignItems: "center",
         position: "absolute",
-        top: "calc(50% - 20px)",
+        top: "calc(50%)",
         zIndex: "1",
         cursor: "pointer",
         transition: "all 0.3s ease",
@@ -52,7 +71,7 @@ function Projects() {
         borderRadius: "50%",
         background: "rgba(0, 0, 0, 0.5)",
         color: "#fff",
-        fontSize: "24px",
+        fontSize: "32px",
         border: "none",
         outline: "none",
     };
@@ -142,13 +161,13 @@ function Projects() {
                                         key={imgIndex}
                                         src={img}
                                         alt={`${project.title} Preview`}
-                                        className="w-full h-56 object-cover"
+                                        className="w-full h-56 object-cover 2xl:h-72"
                                     />
                                 ))}
                             </Slider>
 
                             {/* Content */}
-                            <div className="p-4 mt-11">
+                            <div className="p-4 mt-11 2xl:mt-28">
                                 <h3 className="text-teal-400 text-xl font-bold">
                                     {project.title}
                                 </h3>
@@ -174,6 +193,11 @@ function Projects() {
                 {`
               .custom-dot-class {
                 bottom: -60px;
+              }
+              @media screen and (min-width: 1530px) {
+                .custom-dot-class {
+                    bottom: -125px; /* adjust this value as needed on larger screens */
+                }
               }
               .custom-dot-class li {
                 margin: 0 4px;

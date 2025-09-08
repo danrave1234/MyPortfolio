@@ -31,6 +31,27 @@ import "slick-carousel/slick/slick-theme.css";
 function Projects() {
     const projects = [
         {
+            title: "Locals Local Market",
+            description: "A production e-commerce marketplace for local vendors at localslocalmarket.com. Built with SEO, responsive UI, and secure checkout.",
+            technologies: ["Next.js", "Tailwind CSS", "Node.js", "PostgreSQL"],
+            images: [bytemarketImg1],
+            link: "https://localslocalmarket.com",
+        },
+        {
+            title: "TTS Story Videos Generator",
+            description: "A tool that converts story scripts into narrated videos using TTS and stock visuals. Automates captions, scenes, and exports.",
+            technologies: ["Python", "FFmpeg", "gTTS", "MoviePy"],
+            images: [lostAndFoundImg1],
+            link: "https://github.com/danrave1234/tts-story-videos-generator",
+        },
+        {
+            title: "StudyBoost",
+            description: "A study productivity app with spaced repetition, quizzes, and progress tracking to boost learning efficiency.",
+            technologies: ["React", "Express", "MongoDB"],
+            images: [RuinedLightImg1],
+            link: "https://github.com/danrave1234/studyboost",
+        },
+        {
             title: "E-commerce Platform: Bytemarket",
             description: "A full-stack e-commerce solution built with React.js and Spring Boot.",
             technologies: ["React", "Tailwind CSS", "Spring Boot", "MySQL"],

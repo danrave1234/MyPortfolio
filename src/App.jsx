@@ -75,9 +75,7 @@ rootMargin: '-100px 0px 0px 0px', // Adjust this value based on your header heig
                     <div className="relative z-10">
                         <About />
                         <Experience />
-                        <section id="projects" className="snap-start px-3 sm:px-6 py-10 sm:py-16 relative z-10">
-                            <Projects />
-                        </section>
+                        <Projects />
                         <Contact />
                         <Footer />
                     </div>

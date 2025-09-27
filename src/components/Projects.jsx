@@ -31,27 +31,6 @@ import "slick-carousel/slick/slick-theme.css";
 function Projects() {
     const projects = [
         {
-            title: "Locals Local Market",
-            description: "A production e-commerce marketplace for local vendors at localslocalmarket.com. Built with SEO, responsive UI, and secure checkout.",
-            technologies: ["Next.js", "Tailwind CSS", "Node.js", "PostgreSQL"],
-            images: [bytemarketImg1],
-            link: "https://localslocalmarket.com",
-        },
-        {
-            title: "TTS Story Videos Generator",
-            description: "A tool that converts story scripts into narrated videos using TTS and stock visuals. Automates captions, scenes, and exports.",
-            technologies: ["Python", "FFmpeg", "gTTS", "MoviePy"],
-            images: [lostAndFoundImg1],
-            link: "https://github.com/danrave1234/tts-story-videos-generator",
-        },
-        {
-            title: "StudyBoost",
-            description: "A study productivity app with spaced repetition, quizzes, and progress tracking to boost learning efficiency.",
-            technologies: ["React", "Express", "MongoDB"],
-            images: [RuinedLightImg1],
-            link: "https://github.com/danrave1234/studyboost",
-        },
-        {
             title: "E-commerce Platform: Bytemarket",
             description: "A full-stack e-commerce solution built with React.js and Spring Boot.",
             technologies: ["React", "Tailwind CSS", "Spring Boot", "MySQL"],
@@ -71,6 +50,27 @@ function Projects() {
             technologies: ["Java"],
             images: [ RuinedLightImg1, RuinedLightImg2, RuinedLightImg3, RuinedLightImg4, RuinedLightImg5,RuinedLightImg6,RuinedLightImg7],
             link: "https://github.com/danrave1234/Ruined_Light_OOP1_PROJECT",
+        },
+        {
+            title: "New Project Slot #1",
+            description: "Coming soon. Add a short description of your project here.",
+            technologies: ["Tech 1", "Tech 2"],
+            images: [],
+            link: "#",
+        },
+        {
+            title: "New Project Slot #2",
+            description: "Coming soon. Add a short description of your project here.",
+            technologies: ["Tech 1", "Tech 2"],
+            images: [],
+            link: "#",
+        },
+        {
+            title: "New Project Slot #3",
+            description: "Coming soon. Add a short description of your project here.",
+            technologies: ["Tech 1", "Tech 2"],
+            images: [],
+            link: "#",
         },
     ];
 
@@ -175,20 +175,27 @@ function Projects() {
                             {/* Add Carousel */}
                             <Slider
                                 {...settings}
-                                className="w-full h-48 object-cover"
+                                className="w-full h-56 object-cover"
+                                aria-roledescription="carousel"
                             >
-                                {project.images.map((img, imgIndex) => (
-                                    <img
-                                        key={imgIndex}
-                                        src={img}
-                                        alt={`${project.title} Preview`}
-                                        className="w-full h-56 object-cover 2xl:h-72"
-                                    />
-                                ))}
+                                {project.images && project.images.length > 0 ? (
+                                    project.images.map((img, imgIndex) => (
+                                        <img
+                                            key={imgIndex}
+                                            src={img}
+                                            alt={`${project.title} Preview`}
+                                            className="w-full h-56 object-cover 2xl:h-56"
+                                        />
+                                    ))
+                                ) : (
+                                    <div className="w-full h-56 flex items-start justify-start bg-gray-700 text-gray-300 p-3 pointer-events-none select-none">
+                                        Add screenshots here
+                                    </div>
+                                )}
                             </Slider>
 
                             {/* Content */}
-                            <div className="p-4 mt-11 2xl:mt-28">
+                            <div className="p-4">
                                 <h3 className="text-teal-400 text-xl font-bold">
                                     {project.title}
                                 </h3>
@@ -213,11 +220,11 @@ function Projects() {
             <style>
                 {`
               .custom-dot-class {
-                bottom: -60px;
+                bottom: 8px; /* keep dots inside slider */
               }
               @media screen and (min-width: 1530px) {
                 .custom-dot-class {
-                    bottom: -125px; /* adjust this value as needed on larger screens */
+                    bottom: 8px;
                 }
               }
               .custom-dot-class li {

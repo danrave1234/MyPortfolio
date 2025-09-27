@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import logo from '../assets/Logo.svg';
+import logo from '../assets/Portfolio Logo.svg';
 import Dropdown from "./Dropdown";
 
 import PropTypes from 'prop-types';

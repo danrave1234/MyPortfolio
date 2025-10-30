@@ -4,6 +4,7 @@ import me from './assets/mee.jpg';
 import Header from './components/Header';
 import About from './components/About';
 import Experience from './components/Experience';
+import Achievements from './components/Achievements';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -75,6 +76,7 @@ rootMargin: '-100px 0px 0px 0px', // Adjust this value based on your header heig
                     <div className="relative z-10">
                         <About />
                         <Experience />
+                        <Achievements />
                         <Projects />
                         <Contact />
                         <Footer />

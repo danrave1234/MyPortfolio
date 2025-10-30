@@ -9,6 +9,7 @@ function Dropdown({ toggleMenu, handleNavClick }) {
     const menuItems = [
         { href: '#about', label: 'About' },
         { href: '#experience', label: 'Experience' },
+        { href: '#achievements', label: 'Achievements' },
         { href: '#projects', label: 'Projects' },
         { href: '#contact', label: 'Contact Me' },
         { href: '/Resume.pdf', label: 'Download Resume', isDownload: true },

@@ -10,6 +10,11 @@ import cppIcon from '../assets/cpp3.svg';
 import mysqlIcon from '../assets/mysql.svg';
 import githubIcon from '../assets/github.svg';
 import viteIcon from '../assets/vite.svg';
+import servicenowIcon from '../assets/servicenow.svg';
+import awsIcon from '../assets/aws.svg';
+import oracleCloudIcon from '../assets/oraclecloud.svg';
+import gcloudConsoleIcon from '../assets/gcloudconsole.svg';
+import typescriptIcon from '../assets/typescript.png';
 
 const icons = [
     { src: htmlIcon, alt: 'HTML', thought: 'HTML is the backbone of web development!' },
@@ -22,6 +27,11 @@ const icons = [
     { src: mysqlIcon, alt: 'MySQL', thought: 'MySQL helps manage data effectively!' },
     { src: githubIcon, alt: 'GitHub', thought: 'GitHub is essential for collaboration!' },
     { src: viteIcon, alt: 'Vite', thought: 'Vite makes development super fast!' },
+    { src: typescriptIcon, alt: 'TypeScript', thought: 'TypeScript adds type safety for scalable apps!' },
+    { src: servicenowIcon, alt: 'ServiceNow', thought: 'ServiceNow streamlines ITSM and workflows!' },
+    { src: awsIcon, alt: 'AWS', thought: 'AWS powers scalable cloud infrastructure!' },
+    { src: oracleCloudIcon, alt: 'Oracle Cloud', thought: 'Oracle Cloud for enterprise-grade solutions!' },
+    { src: gcloudConsoleIcon, alt: 'Google Cloud Console', thought: 'GCP Console for managing cloud resources!' },
 ];
 
 function Experience() {

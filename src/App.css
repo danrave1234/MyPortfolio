@@ -9,7 +9,8 @@
     line-height: 1.5;
     color-scheme: dark;
     background-color: #0A1741;
-    font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
 }

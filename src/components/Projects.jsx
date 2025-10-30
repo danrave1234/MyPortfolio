@@ -24,6 +24,21 @@ import RuinedLightImg4 from "../assets/RuinedLight4.jpg";
 import RuinedLightImg5 from "../assets/RuinedLight5.jpg";
 import RuinedLightImg6 from "../assets/RuinedLight6.jpg";
 import RuinedLightImg7 from "../assets/RuinedLight7.jpg";
+import HackatonImg1 from "../assets/Hackaton1.png";
+import HackatonImg2 from "../assets/Hackaton2.png";
+import HackatonImg3 from "../assets/Hackaton3.png";
+import HackatonImg4 from "../assets/Hackaton4.png";
+import LLMImg1 from "../assets/LLM1.png";
+import LLMImg2 from "../assets/LLM2.png";
+import LLMImg3 from "../assets/LLM3.png";
+import LLMImg4 from "../assets/LLM4.png";
+import LLMImg5 from "../assets/LLM5.png";
+import LLMImg6 from "../assets/LLM6.png";
+import LLMImg7 from "../assets/LLM7.png";
+import LLMImg8 from "../assets/LLM8.png";
+import LLMImg9 from "../assets/LLM9.png";
+import LLMImg10 from "../assets/LLM10.png";
+import LLMImg11 from "../assets/LLM11.png";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -52,18 +67,18 @@ function Projects() {
             link: "https://github.com/danrave1234/Ruined_Light_OOP1_PROJECT",
         },
         {
-            title: "New Project Slot #1",
-            description: "Coming soon. Add a short description of your project here.",
-            technologies: ["Tech 1", "Tech 2"],
-            images: [],
-            link: "#",
+            title: "Hackathon Winner: Retro Spaceship Shooter",
+            description: "An old‑school, retro-inspired spaceship shooter built during a Proweaver AI Hackathon. We leveraged AI-assisted workflows for rapid prototyping and iteration—and our team won the competition! Fast-paced gameplay, pixel aesthetics, and lots of excitement.",
+            technologies: ["HTML", "CSS", "JavaScript"],
+            images: [HackatonImg1, HackatonImg2, HackatonImg3, HackatonImg4],
+            link: "https://projectchimera-hackaton.vercel.app/",
         },
         {
-            title: "New Project Slot #2",
-            description: "Coming soon. Add a short description of your project here.",
-            technologies: ["Tech 1", "Tech 2"],
-            images: [],
-            link: "#",
+            title: "LLM – Locals Local Market",
+            description: "A community-driven directory where shop owners can post their stores with locations, products, services, contacts, and photos so users can quickly see what's available nearby. Owners manage their listings via an easy dashboard. Built to be free and helpful for the community.",
+            technologies: ["React", "Tailwind CSS", "Responsive", "Spring Boot", "Java", "Google Cloud", "Vercel", "Deployed", "OAuth"],
+            images: [LLMImg1, LLMImg2, LLMImg3, LLMImg4, LLMImg5, LLMImg6, LLMImg7, LLMImg8, LLMImg9, LLMImg10, LLMImg11],
+            link: "https://localslocalmarket.com/",
         },
         {
             title: "New Project Slot #3",
@@ -175,7 +190,7 @@ function Projects() {
                             {/* Add Carousel */}
                             <Slider
                                 {...settings}
-                                className="w-full h-56 object-cover"
+                                className="project-slider w-full aspect-[16/9] bg-black"
                                 aria-roledescription="carousel"
                             >
                                 {project.images && project.images.length > 0 ? (
@@ -184,11 +199,11 @@ function Projects() {
                                             key={imgIndex}
                                             src={img}
                                             alt={`${project.title} Preview`}
-                                            className="w-full h-56 object-cover 2xl:h-56"
+                                            className="w-full h-full object-contain bg-black"
                                         />
                                     ))
                                 ) : (
-                                    <div className="w-full h-56 flex items-start justify-start bg-gray-700 text-gray-300 p-3 pointer-events-none select-none">
+                                    <div className="w-full h-full flex items-center justify-center bg-black text-gray-300 p-3 pointer-events-none select-none">
                                         Add screenshots here
                                     </div>
                                 )}
@@ -219,30 +234,20 @@ function Projects() {
             </motion.section>
             <style>
                 {`
-              .custom-dot-class {
-                bottom: 8px; /* keep dots inside slider */
-              }
+              /* Ensure slick fills the 16:9 container's height */
+              .project-slider .slick-list,
+              .project-slider .slick-track,
+              .project-slider .slick-slide,
+              .project-slider .slick-slide > div { height: 100%; }
+              /* Dots styling */
+              .custom-dot-class { bottom: 8px; }
               @media screen and (min-width: 1530px) {
-                .custom-dot-class {
-                    bottom: 8px;
-                }
+                .custom-dot-class { bottom: 8px; }
               }
-              .custom-dot-class li {
-                margin: 0 4px;
-              }
-              .custom-dot-class li button {
-                width: 12px;
-                height: 12px;
-              }
-              .custom-dot-class li button:before {
-                font-size: 12px;
-                color: #888;
-                opacity: 0.5;
-              }
-              .custom-dot-class li.slick-active button:before {
-                color: #4fd1c5;
-                opacity: 1;
-              }
+              .custom-dot-class li { margin: 0 4px; }
+              .custom-dot-class li button { width: 12px; height: 12px; }
+              .custom-dot-class li button:before { font-size: 12px; color: #888; opacity: 0.5; }
+              .custom-dot-class li.slick-active button:before { color: #4fd1c5; opacity: 1; }
             `}
             </style>
         </>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import me from './assets/mee.jpg';
+import me from './assets/Me.png';
 import Header from './components/Header';
 import About from './components/About';
 import Experience from './components/Experience';

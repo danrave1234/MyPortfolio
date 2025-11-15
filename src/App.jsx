@@ -63,14 +63,14 @@ rootMargin: '-100px 0px 0px 0px', // Adjust this value based on your header heig
                                 <h1 className="text-2xl sm:text-3xl font-bold sm:pb-1 md:text-4xl lg:text-4xl xl:text-5xl">Danrave C. Keh</h1>
                                 <p className="text-xl text-slate-300 w-fit font-semibold sm:text-xl md:text-2xl pb-3 lg:text-3xl">I&apos;m a FullStack Developer</p>
                                 <p className="text-xs max-w-xs text-slate-400 sm:pt-2 sm:text-sm md:text-md lg:text-2md xl:text-lg xl:max-w-md">
-                                    I&apos;m an Information Technology Student. I specialize in developing backend for websites
+                                    I&apos;m an Information Technology Student at Cebu Institute of Technology (CIT-U). I specialize in developing backend for websites
                                     and applications on the projects I worked on and occasionally do some frontend design.
                                     Currently, I&apos;m learning more about the backend and frontend.
                                 </p>
                             </div>
                         </div>
                         <div className="hidden w-1/2 mx-auto items-center justify-center h-full sm:flex">
-                            <img src={me} alt="Danrave C. Keh" className="h-fit w-screen object-contain border-teal-400 border rounded-2xl sm:scale-75 md: 2xl:scale-50" />
+                            <img src={me} alt="Danrave C. Keh - Full Stack Developer and IT Student at Cebu Institute of Technology" className="h-fit w-screen object-contain border-teal-400 border rounded-2xl sm:scale-75 md: 2xl:scale-50" />
                         </div>
                     </section>
                     <div className="relative z-10">

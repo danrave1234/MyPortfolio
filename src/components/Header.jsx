@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import logo from '../assets/logo.svg';
+import logo from '../assets/Logo - Website Development.svg';
 import Dropdown from "./Dropdown";
 
 import PropTypes from 'prop-types';
@@ -27,7 +27,7 @@ function Header({ activeSection }) {
 
     return (
         <header className="flex h-15 p-7 items-center justify-between fixed top-0 left-0 right-0 z-50">
-            <img src={logo} alt="GG" className="h-12 w-12 md:h-14 md:w-14 object-contain" />
+            <img src={logo} alt="Danrave C. Keh Portfolio Logo" className="h-12 w-12 md:h-14 md:w-14 object-contain" />
             <nav className="flex">
                 <ul className="hidden sm:flex space-x-10 items-center">
                     {navItems.map((item) => (

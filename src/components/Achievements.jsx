@@ -17,7 +17,8 @@ const achievements = [
         images: [hackathonImg1, hackathonImg2, hackathonImg3, hackathonImg4],
         type: "hackathon",
         icon: "🏆",
-        badge: "Competition",
+        badge: "Champion",
+        isChampion: true,
     },
     {
         title: "Featured in Cebu Daily News",
@@ -45,6 +46,167 @@ const achievements = [
         badge: "Freelance",
     },
 ];
+
+function HackathonChampionCard({ achievement, index }) {
+    const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+    const hasMultipleImages = achievement.images && achievement.images.length > 1;
+
+    const handlePrevImage = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (hasMultipleImages) {
+            setSelectedImageIndex((prev) => (prev === 0 ? achievement.images.length - 1 : prev - 1));
+        }
+    };
+
+    const handleNextImage = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (hasMultipleImages) {
+            setSelectedImageIndex((prev) => (prev === achievement.images.length - 1 ? 0 : prev + 1));
+        }
+    };
+
+    const handleBulletClick = (e, idx) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setSelectedImageIndex(idx);
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="group relative mb-12"
+        >
+            {/* Special Champion Badge */}
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-30">
+                <div className="flex items-center gap-3 bg-gradient-to-r from-[#12B7C9] to-[#0ea5e9] px-6 py-2 rounded-full shadow-lg shadow-[#12B7C9]/50 border-2 border-white/20">
+                    <span className="text-2xl">🏆</span>
+                    <span className="text-white font-bold text-sm uppercase tracking-wider">Champion</span>
+                    <span className="text-white/90 text-xs">Retro Spaceship Hackathon 2024</span>
+                </div>
+            </div>
+
+            <div className="relative bg-gradient-to-br from-gray-800/80 via-gray-900/80 to-gray-800/80 border-2 border-[#12B7C9]/40 rounded-2xl overflow-hidden shadow-2xl shadow-[#12B7C9]/20">
+                {/* Animated gradient border effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#12B7C9]/20 via-transparent to-[#12B7C9]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Glow effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#12B7C9]/30 via-[#0ea5e9]/30 to-[#12B7C9]/30 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 relative z-10">
+                    {/* Image Section - Full Height */}
+                    <div className="relative h-80 lg:h-auto bg-gradient-to-br from-gray-900 to-black overflow-hidden order-2 lg:order-1">
+                        {/* Champion overlay gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#12B7C9]/20 via-transparent to-transparent z-[1] pointer-events-none" />
+                        
+                        <AnimatePresence mode="wait">
+                            <motion.img
+                                key={selectedImageIndex}
+                                src={achievement.images[selectedImageIndex]}
+                                alt={`${achievement.title} - Image ${selectedImageIndex + 1}`}
+                                className="w-full h-full object-cover"
+                                initial={{ opacity: 0, scale: 1.1 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                            />
+                        </AnimatePresence>
+
+                        {/* Navigation Arrows */}
+                        {hasMultipleImages && (
+                            <>
+                                <button
+                                    onClick={handlePrevImage}
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-[#12B7C9]/90 hover:bg-[#12B7C9] text-white p-3 rounded-full transition-all z-20 backdrop-blur-sm border-2 border-white/20 hover:scale-110 shadow-lg"
+                                    aria-label="Previous image"
+                                >
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                <button
+                                    onClick={handleNextImage}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-[#12B7C9]/90 hover:bg-[#12B7C9] text-white p-3 rounded-full transition-all z-20 backdrop-blur-sm border-2 border-white/20 hover:scale-110 shadow-lg"
+                                    aria-label="Next image"
+                                >
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            </>
+                        )}
+
+                        {/* Image Bullets/Navigator */}
+                        {hasMultipleImages && (
+                            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                                {achievement.images.map((_, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={(e) => handleBulletClick(e, idx)}
+                                        className={`rounded-full transition-all ${
+                                            idx === selectedImageIndex
+                                                ? 'bg-[#12B7C9] w-10 h-3 shadow-lg shadow-[#12B7C9]/60'
+                                                : 'bg-white/50 hover:bg-white/70 w-3 h-3'
+                                        }`}
+                                        aria-label={`Go to image ${idx + 1}`}
+                                    />
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Image Counter */}
+                        {hasMultipleImages && (
+                            <div className="absolute top-6 right-6 bg-[#12B7C9]/90 backdrop-blur-md px-4 py-2 rounded-lg text-white text-sm font-bold border-2 border-white/30 z-20 shadow-lg">
+                                <span className="text-white">{selectedImageIndex + 1}</span>
+                                <span className="text-white/70"> / </span>
+                                <span>{achievement.images.length}</span>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Content Section */}
+                    <div className="p-8 lg:p-10 flex flex-col justify-center bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm order-1 lg:order-2">
+                        <div className="space-y-4">
+                            <div className="flex items-center gap-3 mb-2">
+                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#12B7C9]/30 to-[#12B7C9]/10 border-2 border-[#12B7C9]/50 flex items-center justify-center shadow-lg">
+                                    <span className="text-3xl">🏆</span>
+                                </div>
+                                <div>
+                                    <div className="text-[#12B7C9] text-xs font-bold uppercase tracking-widest">Champion Achievement</div>
+                                    <div className="text-white/60 text-xs">#1 Position</div>
+                                </div>
+                            </div>
+
+                            <h3 className="text-2xl lg:text-3xl font-bold text-white leading-tight">
+                                Retro Spaceship Hackathon 2024
+                            </h3>
+                            
+                            <p className="text-slate-300 leading-relaxed text-base lg:text-lg">
+                                {achievement.description}
+                            </p>
+
+                            {/* Tech highlights */}
+                            <div className="pt-4 border-t border-[#12B7C9]/20">
+                                <div className="text-[#12B7C9] text-xs font-semibold uppercase tracking-wider mb-2">Built With</div>
+                                <div className="flex flex-wrap gap-2">
+                                    {['Game Engine', 'State Management', 'Collision System', 'Real-time Rendering'].map((tech) => (
+                                        <span key={tech} className="px-3 py-1 bg-[#12B7C9]/10 border border-[#12B7C9]/30 rounded-lg text-[#12B7C9] text-xs font-medium">
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </motion.div>
+    );
+}
 
 function AchievementCard({ achievement, index }) {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -227,10 +389,14 @@ function Achievements() {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.2,
+                staggerChildren: 0.15,
             },
         },
     };
+
+    // Separate champion achievement from others
+    const championAchievement = achievements.find(a => a.isChampion);
+    const otherAchievements = achievements.filter(a => !a.isChampion);
 
     return (
         <section id="achievements" className="min-h-screen flex items-center justify-center px-6 sm:px-10 py-20 relative">
@@ -270,6 +436,15 @@ function Achievements() {
                     </motion.p>
                 </motion.div>
 
+                {/* Champion Achievement - Special Design */}
+                {championAchievement && (
+                    <HackathonChampionCard
+                        achievement={championAchievement}
+                        index={0}
+                    />
+                )}
+
+                {/* Other Achievements */}
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
@@ -277,11 +452,11 @@ function Achievements() {
                     viewport={{ once: true, amount: 0.1 }}
                     className="space-y-6 lg:space-y-8"
                 >
-                    {achievements.map((achievement, index) => (
+                    {otherAchievements.map((achievement, index) => (
                         <AchievementCard
                             key={index}
                             achievement={achievement}
-                            index={index}
+                            index={index + 1}
                         />
                     ))}
                 </motion.div>

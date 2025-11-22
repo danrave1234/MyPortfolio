@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import me from './assets/Me.png';
 import Header from './components/Header';
 import About from './components/About';
 import Experience from './components/Experience';
 import Achievements from './components/Achievements';
 import Projects from './components/Projects';
-import Infrastructure from './components/Infrastructure';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -15,16 +15,28 @@ function App() {
     useEffect(() => {
         const observerOptions = {
             root: null,
-            threshold: 0.5,
-rootMargin: '-100px 0px 0px 0px', // Adjust this value based on your header height
+            threshold: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+            rootMargin: '-100px 0px -30% 0px',
         };
+
+        const sectionVisibility = new Map();
 
         const observerCallback = (entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    setActiveSection(entry.target.id);
+                    sectionVisibility.set(entry.target.id, entry.intersectionRatio);
+                } else {
+                    sectionVisibility.delete(entry.target.id);
                 }
             });
+
+            // Find the section with the highest intersection ratio
+            if (sectionVisibility.size > 0) {
+                const mostVisible = Array.from(sectionVisibility.entries()).reduce((a, b) => 
+                    a[1] > b[1] ? a : b
+                );
+                setActiveSection(mostVisible[0]);
+            }
         };
 
         const observer = new IntersectionObserver(observerCallback, observerOptions);
@@ -73,18 +85,14 @@ rootMargin: '-100px 0px 0px 0px', // Adjust this value based on your header heig
                                     </p>
                                 </div>
                             </div>
-                            {/* Right: Architecture Diagram Placeholder */}
+                            {/* Right: Profile Picture */}
                             <div className="hidden lg:flex items-center justify-center">
-                                <div className="w-full max-w-md bg-gray-800/50 border border-gray-700 rounded-lg p-8">
-                                    <h3 className="text-[#12B7C9] font-semibold mb-4 text-center">Qualitidex Architecture</h3>
-                                    <div className="space-y-3 text-sm text-slate-400">
-                                        <div className="bg-gray-700/50 p-3 rounded">Client → React Frontend</div>
-                                        <div className="bg-gray-700/50 p-3 rounded">API → Python Cloud Functions</div>
-                                        <div className="bg-gray-700/50 p-3 rounded">Database → Firestore</div>
-                                        <div className="bg-gray-700/50 p-3 rounded">Storage → GCS</div>
-                                        <div className="bg-gray-700/50 p-3 rounded">CDN → Cloudflare Pages</div>
-                                    </div>
-                                    <p className="text-xs text-slate-500 mt-4 text-center">Architecture diagram placeholder</p>
+                                <div className="w-full max-w-md">
+                                    <img 
+                                        src={me} 
+                                        alt="Danrave C. Keh - Full Stack & Cloud Developer" 
+                                        className="w-full h-auto rounded-lg border border-gray-700 shadow-lg object-cover"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -94,7 +102,6 @@ rootMargin: '-100px 0px 0px 0px', // Adjust this value based on your header heig
                         <Experience />
                         <Achievements />
                         <Projects />
-                        <Infrastructure />
                         <Contact />
                         <Footer />
                     </div>

@@ -1,111 +1,121 @@
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import htmlIcon from '../assets/html.svg';
-import cssIcon from '../assets/css.svg';
-import jsIcon from '../assets/javascript.svg';
-import reactIcon from '../assets/react.svg';
-import pythonIcon from '../assets/python.svg';
-import javaIcon from '../assets/java.svg';
-import cppIcon from '../assets/cpp3.svg';
-import mysqlIcon from '../assets/mysql.svg';
-import githubIcon from '../assets/github.svg';
-import viteIcon from '../assets/vite.svg';
-import servicenowIcon from '../assets/servicenow.svg';
-import awsIcon from '../assets/aws.svg';
-import oracleCloudIcon from '../assets/oraclecloud.svg';
-import gcloudConsoleIcon from '../assets/gcloudconsole.svg';
-import typescriptIcon from '../assets/typescript.png';
+import { motion } from 'framer-motion';
 
-const icons = [
-    { src: htmlIcon, alt: 'HTML', thought: 'HTML is the backbone of web development!' },
-    { src: cssIcon, alt: 'CSS', thought: 'CSS makes everything beautiful!' },
-    { src: jsIcon, alt: 'JavaScript', thought: 'JavaScript brings websites to life!' },
-    { src: reactIcon, alt: 'React', thought: 'React makes building UIs a breeze!' },
-    { src: pythonIcon, alt: 'Python', thought: 'Python is great for backend and data analysis!' },
-    { src: javaIcon, alt: 'Java', thought: 'Java is powerful for enterprise applications!' },
-    { src: cppIcon, alt: 'C++', thought: 'C++ is fast and efficient!' },
-    { src: mysqlIcon, alt: 'MySQL', thought: 'MySQL helps manage data effectively!' },
-    { src: githubIcon, alt: 'GitHub', thought: 'GitHub is essential for collaboration!' },
-    { src: viteIcon, alt: 'Vite', thought: 'Vite makes development super fast!' },
-    { src: typescriptIcon, alt: 'TypeScript', thought: 'TypeScript adds type safety for scalable apps!' },
-    { src: servicenowIcon, alt: 'ServiceNow', thought: 'ServiceNow streamlines ITSM and workflows!' },
-    { src: awsIcon, alt: 'AWS', thought: 'AWS powers scalable cloud infrastructure!' },
-    { src: oracleCloudIcon, alt: 'Oracle Cloud', thought: 'Oracle Cloud for enterprise-grade solutions!' },
-    { src: gcloudConsoleIcon, alt: 'Google Cloud Console', thought: 'GCP Console for managing cloud resources!' },
+const capabilities = [
+    {
+        title: 'Frontend Engineering',
+        description: 'Building responsive, production-ready interfaces using modern frameworks.',
+        items: [
+            'React, Vite, Tailwind CSS',
+            'Component architecture (atomic design, reusable UI)',
+            'State management patterns',
+            'Client-side routing, caching, and API consumption',
+            'UI/UX systems for dashboards and SaaS tools',
+        ],
+    },
+    {
+        title: 'Backend & API Development',
+        description: 'Building scalable and maintainable server-side systems.',
+        items: [
+            'Java + Spring Boot (REST APIs, auth, validation)',
+            'Python (automation, scripting, data processing)',
+            'MySQL, PostgreSQL, Firestore',
+            'Authentication (JWT, OAuth2, Cognito)',
+            'API design, rate limiting, caching, error handling',
+        ],
+    },
+    {
+        title: 'Cloud & Infrastructure',
+        description: 'Designing and deploying cloud-native applications.',
+        items: [
+            'AWS: EC2, S3, CloudFront, Lambda, SES, VPC, Route53',
+            'CI/CD pipelines (GitHub Actions, CloudBuild)',
+            'Linux server management',
+            'Monitoring, logging, and performance tuning',
+            'Cost-efficient deployment architectures',
+        ],
+    },
+    {
+        title: 'DevOps & Automation',
+        description: 'Streamlining development workflows and deployment processes.',
+        items: [
+            'CI/CD pipelines',
+            'API integration',
+            'Message queues / background jobs',
+            'Containerization (optional future addition)',
+            'Tools: GitHub, Postman, VSCode, Figma, Cloudflare, Docker (learning)',
+        ],
+    },
 ];
 
 function Experience() {
-    const [hoveredIcon, setHoveredIcon] = useState(null);
-    const constraintsRef = useRef(null);
-
     const containerVariants = {
-        hidden: {},
-        visible: { transition: { staggerChildren: 0.2 } },
-    };
-
-    const iconVariants = {
-        hidden: { opacity: 0, scale: 0.8, y: 60 },
+        hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            scale: 1,
+            transition: {
+                staggerChildren: 0.1,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
             y: 0,
-            transition: { type: 'spring', stiffness: 100, damping: 15 },
+            transition: {
+                duration: 0.4,
+            },
         },
     };
 
     return (
         <section
             id="experience"
-            className="snap-start min-h-screen flex flex-col items-center justify-center px-6 sm:px-10 relative overflow-hidden pt-16"
-            ref={constraintsRef}
+            className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-10 py-20 relative"
         >
-            <h2 className="text-3xl font-bold text-teal-400 mb-10">Experience</h2>
+            <motion.h2
+                className="text-3xl sm:text-4xl font-bold text-[#12B7C9] mb-4 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
+            >
+                Capabilities
+            </motion.h2>
+            <motion.p
+                className="text-slate-400 text-center mb-12 max-w-2xl"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+            >
+                Technical skills and expertise across the full development stack
+            </motion.p>
 
-            {/* Icon Grid */}
             <motion.div
-                className="grid grid-cols-3 gap-6 sm:grid-cols-4 sm:gap-8 relative z-20 max-w-lg sm:max-w-xl lg:max-w-2xl"
-                variants={containerVariants} // Container animations
+                className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{once: true, amount: 0.3}}
+                viewport={{ once: true, amount: 0.2 }}
             >
-                {icons.map((icon) => (
+                {capabilities.map((capability, index) => (
                     <motion.div
-                        key={icon.alt}
-                        className="group relative flex items-center justify-center cursor-pointer"
-                        variants={iconVariants} // Icon entry animations
-                        drag
-                        dragConstraints={constraintsRef} // Prevents dragging out of bounds
-                        dragElastic={0.1} // Slight drag elasticity
+                        key={capability.title}
+                        variants={itemVariants}
+                        className="bg-gray-800/50 border border-gray-700 rounded-lg p-6 hover:border-[#12B7C9]/50 transition-colors duration-300"
                     >
-                        {/* Glowing Background */}
-                        <div
-                            className="absolute inset-0 bg-teal-400/20 rounded-full blur-lg transform scale-90 group-hover:scale-110 transition-transform duration-200"
-                        />
-
-                        {/* Icon */}
-                        <img
-                            src={icon.src}
-                            alt={icon.alt}
-                            className="w-16 h-16 z-10 drop-shadow-[0_0_10px_rgba(20,184,166,0.3)] group-hover:drop-shadow-[0_0_20px_rgba(20,184,166,0.5)] transition-all duration-300"
-                            onMouseEnter={() => setHoveredIcon(icon.alt)} // Tooltip interaction for desktop
-                            onMouseLeave={() => setHoveredIcon(null)}
-                            onDragStart={(e) => e.preventDefault()} // Prevent browser drag behavior on the image
-                        />
-
-                        {/* Tooltipdasdada */}
-                        <AnimatePresence>
-                            {hoveredIcon === icon.alt && (
-                                <motion.div
-                                    className="absolute top-20 bg-gray-800/90 text-white px-3 py-2 rounded-md shadow-lg text-sm max-w-[150px] transition-all duration-200 z-20"
-                                    initial={{opacity: 0, y: 10, scale: 0.95}}
-                                    animate={{opacity: 1, y: 0, scale: 1}}
-                                    exit={{opacity: 0, y: 10, scale: 0.95}}
-                                >
-                                    {icon.thought}
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
+                        <h3 className="text-xl font-bold text-white mb-3">{capability.title}</h3>
+                        <p className="text-slate-400 text-sm mb-4 leading-relaxed">{capability.description}</p>
+                        <ul className="space-y-2">
+                            {capability.items.map((item, itemIndex) => (
+                                <li key={itemIndex} className="text-slate-300 text-sm flex items-start">
+                                    <span className="text-[#12B7C9] mr-2">•</span>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
                     </motion.div>
                 ))}
             </motion.div>

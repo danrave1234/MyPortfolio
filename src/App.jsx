@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import me from './assets/me.png';
 import Header from './components/Header';
 import About from './components/About';
 import Experience from './components/Experience';
 import Achievements from './components/Achievements';
 import Projects from './components/Projects';
+import Infrastructure from './components/Infrastructure';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -55,22 +55,38 @@ rootMargin: '-100px 0px 0px 0px', // Adjust this value based on your header heig
             </div>
             <Header activeSection={activeSection} />
             <main className="">
-                <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
-                    <section id="home" className="snap-start min-h-screen flex items-center justify-center px-5 sm:px-20 lg:px-40 2xl:px-64">
-                        <div className="flex-col sm:w-1/2 mx-auto flex items-center text-wrap justify-center h-full">
-                            <div className="sm:w-fit">
-                                <p className="text-sm text-teal-300 pb-1 sm:pb-2 sm:text-md lg:text-lg">Hi! My name is</p>
-                                <h1 className="text-2xl sm:text-3xl font-bold sm:pb-1 md:text-4xl lg:text-4xl xl:text-5xl">Danrave C. Keh</h1>
-                                <p className="text-xl text-slate-300 w-fit font-semibold sm:text-xl md:text-2xl pb-3 lg:text-3xl">I&apos;m a FullStack Developer</p>
-                                <p className="text-xs max-w-xs text-slate-400 sm:pt-2 sm:text-sm md:text-md lg:text-2md xl:text-lg xl:max-w-md">
-                                    I&apos;m an Information Technology Student at Cebu Institute of Technology (CIT-U). I specialize in developing backend for websites
-                                    and applications on the projects I worked on and occasionally do some frontend design.
-                                    Currently, I&apos;m learning more about the backend and frontend.
-                                </p>
+                <div className="min-h-screen overflow-y-auto scroll-smooth">
+                    <section id="home" className="min-h-screen flex items-center justify-center px-5 sm:px-20 lg:px-40 2xl:px-64 py-20">
+                        <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            {/* Left: Name and Bio */}
+                            <div className="space-y-6">
+                                <div>
+                                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2">Danrave C. Keh</h1>
+                                    <p className="text-xl sm:text-2xl md:text-3xl text-[#12B7C9] font-semibold mb-6">Full Stack & Cloud Developer</p>
+                                </div>
+                                <div className="space-y-4 text-slate-300 text-base sm:text-lg leading-relaxed">
+                                    <p>
+                                        I build real production systems—not demo apps. My work focuses on end-to-end development: frontend, backend, cloud infrastructure, deployment pipelines, and performance optimization. I specialize in designing scalable architectures, automating workflows, and turning early-stage ideas into working products.
+                                    </p>
+                                    <p>
+                                        I've shipped multiple deployed systems used by real users, including AI-powered tools, SaaS platforms, and cloud-native web applications. My approach is straightforward: build fast, build reliably, and deploy with best practices so the system doesn't break in the real world.
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="hidden w-1/2 mx-auto items-center justify-center h-full sm:flex">
-                            <img src={me} alt="Danrave C. Keh - Full Stack Developer and IT Student at Cebu Institute of Technology" className="h-fit w-screen object-contain border-teal-400 border rounded-2xl sm:scale-75 md: 2xl:scale-50" />
+                            {/* Right: Architecture Diagram Placeholder */}
+                            <div className="hidden lg:flex items-center justify-center">
+                                <div className="w-full max-w-md bg-gray-800/50 border border-gray-700 rounded-lg p-8">
+                                    <h3 className="text-[#12B7C9] font-semibold mb-4 text-center">Qualitidex Architecture</h3>
+                                    <div className="space-y-3 text-sm text-slate-400">
+                                        <div className="bg-gray-700/50 p-3 rounded">Client → React Frontend</div>
+                                        <div className="bg-gray-700/50 p-3 rounded">API → Python Cloud Functions</div>
+                                        <div className="bg-gray-700/50 p-3 rounded">Database → Firestore</div>
+                                        <div className="bg-gray-700/50 p-3 rounded">Storage → GCS</div>
+                                        <div className="bg-gray-700/50 p-3 rounded">CDN → Cloudflare Pages</div>
+                                    </div>
+                                    <p className="text-xs text-slate-500 mt-4 text-center">Architecture diagram placeholder</p>
+                                </div>
+                            </div>
                         </div>
                     </section>
                     <div className="relative z-10">
@@ -78,6 +94,7 @@ rootMargin: '-100px 0px 0px 0px', // Adjust this value based on your header heig
                         <Experience />
                         <Achievements />
                         <Projects />
+                        <Infrastructure />
                         <Contact />
                         <Footer />
                     </div>

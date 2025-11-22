@@ -11,7 +11,7 @@ function Header({ activeSection }) {
 
     const navItems = [
         { href: '#about', label: 'About' },
-        { href: '#experience', label: 'Experience' },
+        { href: '#experience', label: 'Capabilities' },
         { href: '#achievements', label: 'Achievements' },
         { href: '#projects', label: 'Projects' },
         { href: '#contact', label: 'Contact Me' },
@@ -34,7 +34,7 @@ function Header({ activeSection }) {
                         <li key={item.href}>
                             <a
                                 href={item.href}
-                                className={`cursor-pointer underline-effect hover:text-teal-500 transition-all ease-linear duration-300 ${
+                                className={`cursor-pointer underline-effect hover:text-[#12B7C9] transition-all ease-linear duration-300 ${
                                     activeSection === item.href.slice(1) ? 'active' : ''
                                 }`}
                                 onClick={(e) => handleNavClick(e, item.href)}
@@ -46,7 +46,7 @@ function Header({ activeSection }) {
                     <li>
                         <a
                             href="/Resume.pdf" // Path to the PDF in the public folder
-                            className="border border-teal-400 font-semibold text-teal-300 bg-teal-400/10 py-1 px-2 rounded hover:bg-teal-400/20 transition-colors duration-300"
+                            className="border border-[#12B7C9] font-semibold text-[#12B7C9] bg-[#12B7C9]/10 py-1 px-2 rounded hover:bg-[#12B7C9]/20 transition-colors duration-300"
                             download="Resume.pdf" // File name for the downloaded PDF
                         >
                             Resume

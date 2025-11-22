@@ -1,33 +1,5 @@
-import Slider from "react-slick";
-import { motion } from "framer-motion";
-import PropTypes from 'prop-types';
-import bytemarketImg1 from "../assets/ByteMarket1.jpg";
-import bytemarketImg2 from "../assets/ByteMarket2.jpg";
-import bytemarketImg3 from "../assets/ByteMarket3.jpg";
-import bytemarketImg4 from "../assets/ByteMarket4.jpg";
-import bytemarketImg5 from "../assets/ByteMarket5.jpg";
-import bytemarketImg6 from "../assets/ByteMarket6.jpg";
-import bytemarketImg7 from "../assets/ByteMarket7.jpg";
-import bytemarketImg8 from "../assets/ByteMarket8.jpg";
-import bytemarketImg9 from "../assets/ByteMarket9.jpg";
-import bytemarketImg10 from "../assets/ByteMarket10.jpg";
-import bytemarketImg11 from "../assets/ByteMarket11.jpg";
-
-import lostAndFoundImg1 from "../assets/Lost&FoundSystem1.jpg";
-import lostAndFoundImg2 from "../assets/Lost&FoundSystem2.jpg";
-import lostAndFoundImg3 from "../assets/Lost&FoundSystem3.jpg";
-import lostAndFoundImg4 from "../assets/Lost&FoundSystem4.jpg";
-import RuinedLightImg1 from "../assets/RuinedLight1.jpg";
-import RuinedLightImg2 from "../assets/RuinedLight2.jpg";
-import RuinedLightImg3 from "../assets/RuinedLight3.jpg";
-import RuinedLightImg4 from "../assets/RuinedLight4.jpg";
-import RuinedLightImg5 from "../assets/RuinedLight5.jpg";
-import RuinedLightImg6 from "../assets/RuinedLight6.jpg";
-import RuinedLightImg7 from "../assets/RuinedLight7.jpg";
-import HackatonImg1 from "../assets/Hackaton1.png";
-import HackatonImg2 from "../assets/Hackaton2.png";
-import HackatonImg3 from "../assets/Hackaton3.png";
-import HackatonImg4 from "../assets/Hackaton4.png";
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import LLMImg1 from "../assets/LLM1.png";
 import LLMImg2 from "../assets/LLM2.png";
 import LLMImg3 from "../assets/LLM3.png";
@@ -40,219 +12,405 @@ import LLMImg9 from "../assets/LLM9.png";
 import LLMImg10 from "../assets/LLM10.png";
 import LLMImg11 from "../assets/LLM11.png";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+const projects = [
+    {
+        title: "Qualitidex",
+        subtitle: "AI-powered QA Automation System",
+        featured: true,
+        category: "Production System",
+        description: "A full-stack platform that generates, executes, and manages automated test cases using AI. Designed for teams that need rapid QA cycles without manual work.",
+        keyFeatures: [
+            "AI test generation (LLMs with custom flows)",
+            "Test execution engine",
+            "Role-based user system",
+            "Admin & analytics dashboard",
+            "Scripted automation and scheduled checks",
+            "Cloud-hosted backend + CDN optimized frontend",
+        ],
+        tech: [
+            "React + Vite + Tailwind",
+            "Backend: Python + Cloud Functions",
+            "Database: Firestore",
+            "Storage: GCS",
+            "CI/CD: GitHub Actions",
+            "Hosting: Cloudflare Pages + GCP",
+        ],
+        responsibilities: [
+            "Lead developer (frontend, backend, infra)",
+            "System architecture & database design",
+            "Deployment pipelines",
+            "AI prompt and flow engineering",
+        ],
+        link: "https://qualitidex.com",
+        images: [LLMImg1, LLMImg2, LLMImg3], // Placeholder - replace with actual Qualitidex images
+    },
+    {
+        title: "AutoShorts AI",
+        subtitle: "Automated Short-Form Video Generator",
+        featured: true,
+        category: "Production System",
+        description: "Generates fully edited short videos (scripts, narration, background video, captions, music, thumbnails).",
+        keyFeatures: [
+            "Script generation",
+            "Auto video editing pipeline",
+            "Background audio/video sourcing",
+            "Narration generation",
+            "Captions and thumbnail generator",
+            "Export pipeline",
+        ],
+        tech: [
+            "React",
+            "NodeJS + Python",
+            "Cloud Functions",
+            "Storage Buckets",
+            "AI text + audio models",
+            "Deployment on Firebase & Cloudflare",
+        ],
+        responsibilities: [
+            "Entire pipeline architecture",
+            "Automation logic",
+            "Deployment + scaling",
+            "UX for video editing builder",
+        ],
+        link: null, // Private/Personal Use - no link
+        images: [LLMImg1, LLMImg2], // Placeholder - replace with actual AutoShorts images
+    },
+    {
+        title: "LocalsLocal Market (LLM)",
+        subtitle: "Community Marketplace Platform",
+        featured: true,
+        category: "Production System",
+        description: "Platform to help users discover local products and vendors.",
+        keyFeatures: [
+            "Secure authentication (OAuth2)",
+            "Vendor product management",
+            "Search and discovery system",
+            "Admin dashboard",
+            "Fully responsive design",
+        ],
+        tech: [
+            "React frontend",
+            "Spring Boot backend",
+            "MySQL database",
+            "Google Cloud deployment",
+            "CI/CD with GitHub Actions",
+        ],
+        responsibilities: [
+            "Backend + API",
+            "Auth + sessions",
+            "Frontend integration",
+            "Cloud deployment workflow",
+        ],
+        link: "https://localslocalmarket.com/",
+        images: [LLMImg1, LLMImg2, LLMImg3, LLMImg4, LLMImg5, LLMImg6, LLMImg7, LLMImg8, LLMImg9, LLMImg10, LLMImg11],
+    },
+    {
+        title: "Wildcats Radio",
+        subtitle: "Campus Radio Streaming Platform",
+        featured: true,
+        category: "School Project",
+        description: "A live streaming web platform for CIT-U Wildcats Radio with an integrated audio player, show schedule display, mobile-first UI, and cloud deployment.",
+        keyFeatures: [
+            "Live streaming integration",
+            "Show schedule system",
+            "Audio controls & buffering",
+            "Branded UI for CIT-U",
+        ],
+        tech: [
+            "React",
+            "Tailwind",
+            "Streaming Server",
+            "Cloudflare",
+        ],
+        responsibilities: [
+            "Frontend development",
+            "Streaming integration",
+            "UI/UX design",
+            "Cloud deployment",
+        ],
+        link: "https://wildcat-radio.live",
+        images: [LLMImg1, LLMImg2, LLMImg3], // Placeholder - replace with actual Wildcats Radio images
+    },
+];
+
+function ProjectCard({ project, index, currentImageIndex, setCurrentImageIndex, cardVariants }) {
+    const hasMultipleImages = project.images && project.images.length > 1;
+    const isPrivate = project.link === null;
+
+    const handlePrevImage = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (hasMultipleImages) {
+            setCurrentImageIndex((prev) => (prev === 0 ? project.images.length - 1 : prev - 1));
+        }
+    };
+
+    const handleNextImage = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (hasMultipleImages) {
+            setCurrentImageIndex((prev) => (prev === project.images.length - 1 ? 0 : prev + 1));
+        }
+    };
+
+    const handleBulletClick = (e, idx) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setCurrentImageIndex(idx);
+    };
+
+    const cardContent = (
+        <div className={`grid grid-cols-1 ${index % 2 === 0 ? 'lg:grid-cols-2' : 'lg:grid-cols-2'} gap-0`}>
+            {/* Image Section */}
+            <div className={`${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'} relative h-64 sm:h-80 lg:h-full overflow-hidden bg-gray-900`}>
+                {project.images && project.images.length > 0 ? (
+                    <>
+                        <AnimatePresence mode="wait">
+                            <motion.img
+                                key={currentImageIndex}
+                                src={project.images[currentImageIndex]}
+                                alt={`${project.title} - Image ${currentImageIndex + 1}`}
+                                className="w-full h-full object-cover"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                            />
+                        </AnimatePresence>
+
+                        {/* Navigation Arrows */}
+                        {hasMultipleImages && (
+                            <>
+                                <button
+                                    onClick={handlePrevImage}
+                                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors z-10"
+                                    aria-label="Previous image"
+                                >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                <button
+                                    onClick={handleNextImage}
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors z-10"
+                                    aria-label="Next image"
+                                >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            </>
+                        )}
+
+                        {/* Image Bullets/Navigator */}
+                        {hasMultipleImages && (
+                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                                {project.images.map((_, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={(e) => handleBulletClick(e, idx)}
+                                        className={`w-2 h-2 rounded-full transition-all ${
+                                            idx === currentImageIndex
+                                                ? 'bg-[#12B7C9] w-6'
+                                                : 'bg-white/50 hover:bg-white/70'
+                                        }`}
+                                        aria-label={`Go to image ${idx + 1}`}
+                                    />
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Image Counter */}
+                        {hasMultipleImages && (
+                            <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm px-2 py-1 rounded text-white text-xs">
+                                {currentImageIndex + 1} / {project.images.length}
+                            </div>
+                        )}
+                    </>
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-800">
+                        <span className="text-slate-500">Image placeholder</span>
+                    </div>
+                )}
+
+                {/* Category Badge */}
+                <div className="absolute top-4 left-4">
+                    <span className={`px-3 py-1 rounded text-xs font-semibold ${
+                        project.category === "School Project" 
+                            ? "bg-cyan-500/20 border border-cyan-500/30 text-cyan-400"
+                            : "bg-[#12B7C9]/20 border border-[#12B7C9]/30 text-[#12B7C9]"
+                    }`}>
+                        {project.category}
+                    </span>
+                </div>
+
+                {/* Featured Badge */}
+                {index === 0 && (
+                    <div className="absolute top-4 right-4 z-10">
+                        <span className="px-3 py-1 bg-[#12B7C9]/20 border border-[#12B7C9]/30 rounded text-[#12B7C9] text-xs font-semibold">
+                            FEATURED
+                        </span>
+                    </div>
+                )}
+            </div>
+
+            {/* Content Section */}
+            <div className={`${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'} p-6 sm:p-8 flex flex-col justify-center`}>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 group-hover:text-[#12B7C9] transition-colors">
+                    {project.title}
+                </h3>
+                <p className="text-xl text-[#12B7C9] mb-4">{project.subtitle}</p>
+                <p className="text-slate-300 mb-6 leading-relaxed">{project.description}</p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h4 className="text-white font-semibold mb-2 text-sm">Key Features</h4>
+                        <ul className="space-y-1">
+                            {project.keyFeatures.slice(0, 3).map((feature, idx) => (
+                                <li key={idx} className="text-slate-300 text-xs flex items-start">
+                                    <span className="text-[#12B7C9] mr-2">•</span>
+                                    <span>{feature}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="text-white font-semibold mb-2 text-sm">Tech Stack</h4>
+                        <ul className="space-y-1">
+                            {project.tech.slice(0, 4).map((tech, idx) => (
+                                <li key={idx} className="text-slate-300 text-xs flex items-start">
+                                    <span className="text-[#12B7C9] mr-2">•</span>
+                                    <span>{tech}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+
+                {/* Link or Private Notice */}
+                {isPrivate ? (
+                    <div className="flex items-center gap-2 text-slate-400 text-sm">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                        <span>Private/Personal Use</span>
+                    </div>
+                ) : (
+                    <div className="flex items-center gap-2 text-[#12B7C9] font-semibold group-hover:text-[#12B7C9]/80 transition-colors">
+                        <span>View Project</span>
+                        <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+
+    if (isPrivate) {
+        return (
+            <motion.div
+                variants={cardVariants}
+                className="block bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden hover:border-[#12B7C9]/50 transition-all duration-300 group"
+            >
+                {cardContent}
+            </motion.div>
+        );
+    }
+
+    return (
+        <motion.a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            variants={cardVariants}
+            className="block bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden hover:border-[#12B7C9]/50 transition-all duration-300 group"
+        >
+            {cardContent}
+        </motion.a>
+    );
+}
 
 function Projects() {
-    const projects = [
-        {
-            title: "E-commerce Platform: Bytemarket",
-            description: "A full-stack e-commerce solution built with React.js and Spring Boot.",
-            technologies: ["React", "Tailwind CSS", "Spring Boot", "MySQL"],
-            images: [bytemarketImg1, bytemarketImg2, bytemarketImg3, bytemarketImg4, bytemarketImg5, bytemarketImg6, bytemarketImg7, bytemarketImg8, bytemarketImg9, bytemarketImg10, bytemarketImg11],
-            link: "https://github.com/danrave1234/APPDEV_Bytemarket",
-        },
-        {
-            title: "Lost & Found System in CIT-U",
-            description: "A web-based solution aimed at efficiently managing lost and found items within CIT-U, built for streamlined task handling and responsive design.",
-            technologies: ["Python", "SQLite"],
-            images: [lostAndFoundImg1, lostAndFoundImg2, lostAndFoundImg3, lostAndFoundImg4],
-            link: "https://github.com/danrave1234/ProjectDevelopment-in-IM2",
-        },
-        {
-            title: "Ruined Light! : A Text Turn-Based RPG Game",
-            description: "A text-based RPG game built in Java, with a focus on OOP. Inspired by the gameplay of Axie Infinity.",
-            technologies: ["Java"],
-            images: [ RuinedLightImg1, RuinedLightImg2, RuinedLightImg3, RuinedLightImg4, RuinedLightImg5,RuinedLightImg6,RuinedLightImg7],
-            link: "https://github.com/danrave1234/Ruined_Light_OOP1_PROJECT",
-        },
-        {
-            title: "Hackathon Winner: Retro Spaceship Shooter",
-            description: "An old‑school, retro-inspired spaceship shooter built during a Proweaver AI Hackathon. We leveraged AI-assisted workflows for rapid prototyping and iteration—and our team won the competition! Fast-paced gameplay, pixel aesthetics, and lots of excitement.",
-            technologies: ["HTML", "CSS", "JavaScript"],
-            images: [HackatonImg1, HackatonImg2, HackatonImg3, HackatonImg4],
-            link: "https://projectchimera-hackaton.vercel.app/",
-        },
-        {
-            title: "LLM – Locals Local Market",
-            description: "A community-driven directory where shop owners can post their stores with locations, products, services, contacts, and photos so users can quickly see what's available nearby. Owners manage their listings via an easy dashboard. Built to be free and helpful for the community.",
-            technologies: ["React", "Tailwind CSS", "Responsive", "Spring Boot", "Java", "Google Cloud", "Vercel", "Deployed", "OAuth"],
-            images: [LLMImg1, LLMImg2, LLMImg3, LLMImg4, LLMImg5, LLMImg6, LLMImg7, LLMImg8, LLMImg9, LLMImg10, LLMImg11],
-            link: "https://localslocalmarket.com/",
-        },
-        {
-            title: "New Project Slot #3",
-            description: "Coming soon. Add a short description of your project here.",
-            technologies: ["Tech 1", "Tech 2"],
-            images: [],
-            link: "#",
-        },
-    ];
+    const [currentImageIndices, setCurrentImageIndices] = useState({});
 
-    const fadeInVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-    };
-    const arrowStyles = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        position: "absolute",
-        top: "calc(50%)",
-        zIndex: "1",
-        cursor: "pointer",
-        transition: "all 0.3s ease",
-        width: "40px",
-        height: "40px",
-        borderRadius: "50%",
-        background: "rgba(0, 0, 0, 0.5)",
-        color: "#fff",
-        fontSize: "32px",
-        border: "none",
-        outline: "none",
-    };
-
-    const Arrow = ({ direction, onClick }) => {
-        const styles = {
-            ...arrowStyles,
-            ...{
-                [direction === "next" ? "right" : "left"]: "10px",
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.15,
             },
-        };
-        return (
-            <button
-                style={styles}
-                onClick={onClick}
-                aria-label={direction === "next" ? "Next image" : "Previous image"}
-                className="hover:bg-teal-400 hover:text-gray-800 focus:bg-teal-400 focus:text-gray-800"
-            >
-                {direction === "next" ? "›" : "‹"}
-            </button>
-        );
-    };
-    Arrow.propTypes = {
-        direction: PropTypes.string.isRequired,
-        onClick: PropTypes.func.isRequired,
+        },
     };
 
-    const NextArrow = ({ onClick }) => {
-        return <Arrow direction="next" onClick={onClick} />;
+    const cardVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.4,
+            },
+        },
     };
 
-    NextArrow.propTypes = {
-        onClick: PropTypes.func.isRequired,
-    };
+    const featuredProjects = projects.filter(p => p.featured);
 
-    const PrevArrow = ({ onClick }) => {
-        return <Arrow direction="prev" onClick={onClick} />;
-    };
-
-    PrevArrow.propTypes = {
-        onClick: PropTypes.func.isRequired,
-    };
-
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,
-        dotsClass: "slick-dots custom-dot-class",
+    const setCurrentImageIndex = (projectIndex, imageIndex) => {
+        setCurrentImageIndices((prev) => ({
+            ...prev,
+            [projectIndex]: imageIndex,
+        }));
     };
 
     return (
-        <>
-            <motion.section
-                id="projects"
-                className="snap-start min-h-screen flex flex-col items-center justify-center px-4 py-8 sm:px-6 sm:py-14 md:px-12 lg:px-20 lg:py-16"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={fadeInVariants}
+        <section
+            id="projects"
+            className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-10 py-20 relative"
+        >
+            <motion.h2
+                className="text-3xl sm:text-4xl font-bold text-[#12B7C9] mb-4 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
             >
-                <motion.header
-                    className="text-teal-400 text-3xl font-bold text-center mb-12"
-                >
-                    Projects
-                </motion.header>
-                <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    {projects.map((project, index) => (
-                        <motion.a
-                            key={index}
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            whileHover={{ scale: 1.05, boxShadow: "0px 8px 24px rgba(0,0,0,0.2)" }}
-                            className="transform transition-transform bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl"
-                        >
-                            {/* Add Carousel */}
-                            <Slider
-                                {...settings}
-                                className="project-slider w-full aspect-[16/9] bg-black"
-                                aria-roledescription="carousel"
-                            >
-                                {project.images && project.images.length > 0 ? (
-                                    project.images.map((img, imgIndex) => (
-                                        <img
-                                            key={imgIndex}
-                                            src={img}
-                                            alt={`${project.title} Preview`}
-                                            className="w-full h-full object-contain bg-black"
-                                        />
-                                    ))
-                                ) : (
-                                    <div className="w-full h-full flex items-center justify-center bg-black text-gray-300 p-3 pointer-events-none select-none">
-                                        Add screenshots here
-                                    </div>
-                                )}
-                            </Slider>
+                Projects
+            </motion.h2>
+            <motion.p
+                className="text-slate-400 text-center mb-12 max-w-2xl"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+            >
+                Case studies of deployed production systems
+            </motion.p>
 
-                            {/* Content */}
-                            <div className="p-4">
-                                <h3 className="text-teal-400 text-xl font-bold">
-                                    {project.title}
-                                </h3>
-                                <p className="text-gray-300 text-sm mt-2">
-                                    {project.description}
-                                </p>
-                                <ul className="mt-4 flex flex-wrap gap-2">
-                                    {project.technologies.map((tech, idx) => (
-                                        <li
-                                            key={idx}
-                                            className="text-teal-300 text-xs bg-teal-400 bg-opacity-20 px-2 py-1 rounded-lg"
-                                        >
-                                            {tech}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </motion.a>
+            <div className="w-full max-w-7xl">
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    className="space-y-12"
+                >
+                    {/* Featured Projects */}
+                    {featuredProjects.map((project, index) => (
+                        <ProjectCard
+                            key={index}
+                            project={project}
+                            index={index}
+                            currentImageIndex={currentImageIndices[index] || 0}
+                            setCurrentImageIndex={(idx) => setCurrentImageIndex(index, idx)}
+                            cardVariants={cardVariants}
+                        />
                     ))}
-                </div>
-            </motion.section>
-            <style>
-                {`
-              /* Ensure slick fills the 16:9 container's height */
-              .project-slider .slick-list,
-              .project-slider .slick-track,
-              .project-slider .slick-slide,
-              .project-slider .slick-slide > div { height: 100%; }
-              /* Dots styling */
-              .custom-dot-class { bottom: 8px; }
-              @media screen and (min-width: 1530px) {
-                .custom-dot-class { bottom: 8px; }
-              }
-              .custom-dot-class li { margin: 0 4px; }
-              .custom-dot-class li button { width: 12px; height: 12px; }
-              .custom-dot-class li button:before { font-size: 12px; color: #888; opacity: 0.5; }
-              .custom-dot-class li.slick-active button:before { color: #4fd1c5; opacity: 1; }
-            `}
-            </style>
-        </>
+                </motion.div>
+            </div>
+        </section>
     );
 }
 
 export default Projects;
-

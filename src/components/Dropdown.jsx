@@ -8,7 +8,7 @@ function Dropdown({ toggleMenu, handleNavClick }) {
     const [activeSection, setActiveSection] = useState('');
     const menuItems = [
         { href: '#about', label: 'About' },
-        { href: '#experience', label: 'Experience' },
+        { href: '#experience', label: 'Capabilities' },
         { href: '#achievements', label: 'Achievements' },
         { href: '#projects', label: 'Projects' },
         { href: '#contact', label: 'Contact Me' },
@@ -44,7 +44,7 @@ function Dropdown({ toggleMenu, handleNavClick }) {
             <div>
                 <Menu.Button
                     onClick={toggleMenu}
-                    className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-teal-400/10 px-3 py-2 text-sm font-semibold text-teal-300 shadow-sm ring-1 ring-inset ring-teal-300 hover:bg-teal-400/20 transition-colors duration-300"
+                    className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-[#12B7C9]/10 px-3 py-2 text-sm font-semibold text-[#12B7C9] shadow-sm ring-1 ring-inset ring-[#12B7C9] hover:bg-[#12B7C9]/20 transition-colors duration-300"
                 >
                     {getCurrentLabel()} {/* Dynamically update label */}
                     <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -70,8 +70,8 @@ function Dropdown({ toggleMenu, handleNavClick }) {
                                         download={item.isDownload || false}
                                         className={`flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200 ${
                                             active || activeSection === item.href.slice(1)
-                                                ? 'bg-teal-400 text-gray-900'
-                                                : 'text-gray-300 hover:bg-teal-500 hover:text-white'
+                                                ? 'bg-[#12B7C9] text-gray-900'
+                                                : 'text-gray-300 hover:bg-[#12B7C9]/80 hover:text-white'
                                         }`}
                                         onClick={(e) => {
                                             if (!item.isDownload) {
@@ -81,8 +81,8 @@ function Dropdown({ toggleMenu, handleNavClick }) {
                                         }}
                                     >
                             <span
-                                className={`mr-3 inline-flex h-6 w-6 items-center justify-center rounded-md bg-teal-600 text-white ${
-                                    active ? 'bg-teal-700' : 'bg-teal-400'
+                                className={`mr-3 inline-flex h-6 w-6 items-center justify-center rounded-md text-white ${
+                                    active ? 'bg-[#12B7C9]/80' : 'bg-[#12B7C9]'
                                 }`}
                             >
                                 {item.label.charAt(0)}

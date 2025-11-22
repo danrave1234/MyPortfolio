@@ -1,76 +1,105 @@
-import hackathonImg from '../assets/Hackaton1.png';
-import img1 from '../assets/achievements1.png';
-import img2 from '../assets/achievements2.png';
-import img3 from '../assets/achievements3.png';
-import img4 from '../assets/achievements4.png';
-import img5 from '../assets/achievements5.png';
+import { motion } from 'framer-motion';
+
+const achievements = [
+    {
+        title: "Champion — Retro Spaceship Hackathon 2024",
+        description: "Built a browser-based game under time constraints with advanced mechanics, scoring, game loop, state system, and collision engine.",
+    },
+    {
+        title: "Featured in Cebu Daily News",
+        description: "Recognized for innovation in software engineering and rapid prototyping.",
+        link: "https://cebudailynews.inquirer.net/659355/reimagining-play-powering-the-future-proweavers-promptquest-showcases-cebuano-talent-in-tech?utm_source=dlvr.it&utm_medium=facebook",
+    },
+    {
+        title: "System Deployments",
+        description: "Multiple deployed platforms used by real users and teams.",
+    },
+    {
+        title: "Client Work",
+        description: "jpmorada.photography and other freelance systems",
+    },
+];
 
 function Achievements() {
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.4,
+            },
+        },
+    };
+
     return (
-        <section id="achievements" className="snap-start min-h-screen flex items-center justify-center px-6 sm:px-10 pt-16">
-            <div className="w-full max-w-6xl">
-                <h2 className="text-3xl font-bold text-teal-400 mb-6 sm:mb-8">Achievements</h2>
+        <section id="achievements" className="min-h-screen flex items-center justify-center px-6 sm:px-10 py-20">
+            <div className="w-full max-w-4xl">
+                <motion.h2
+                    className="text-3xl sm:text-4xl font-bold text-[#12B7C9] mb-4 text-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4 }}
+                >
+                    Achievements
+                </motion.h2>
+                <motion.p
+                    className="text-slate-400 text-center mb-12 max-w-2xl mx-auto"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.1 }}
+                >
+                    Recognition and milestones in my development journey
+                </motion.p>
 
-                {/* Single Event: Hackathon Win + Press Features */}
-                <article className="rounded-2xl border border-teal-400/30 bg-gray-800/30 p-5 sm:p-6">
-                    <header className="mb-4">
-                        <h3 className="text-2xl font-semibold text-white">Hackathon Win — Recognized Locally</h3>
-                        <p className="text-slate-300 text-sm mt-1">
-                            Built a functional prototype in just 2 hours (no backend) and topped 25+ teams. This one event was
-                            recognized by our school and featured by local news pages like Cebu Daily News and SunStar.
-                        </p>
-                        <a
-                            href="https://cebudailynews.inquirer.net/659355/reimagining-play-powering-the-future-proweavers-promptquest-showcases-cebuano-talent-in-tech?utm_source=dlvr.it&utm_medium=facebook"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block mt-2 text-teal-300 underline-effect hover:text-teal-400"
-                            title="Read the Cebu Daily News article"
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    className="space-y-6"
+                >
+                    {achievements.map((achievement, index) => (
+                        <motion.div
+                            key={index}
+                            variants={itemVariants}
+                            className="bg-gray-800/50 border border-gray-700 rounded-lg p-6 hover:border-[#12B7C9]/50 transition-colors duration-300"
                         >
-                            Read the Cebu Daily News article
-                        </a>
-                    </header>
-
-                    {/* Mobile: horizontal scroll of images */}
-                    <div className="sm:hidden -mx-5 px-5">
-                        <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2">
-                            {[hackathonImg, img1, img2, img3, img4, img5].map((src, i) => (
-                                <img
-                                    key={i}
-                                    src={src}
-                                    alt={`Hackathon event photo ${i + 1}`}
-                                    loading="lazy"
-                                    className="h-40 w-64 object-cover rounded-lg border border-teal-400/30 snap-start flex-shrink-0"
-                                />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Desktop/tablet: collage layout */}
-                    <div className="hidden sm:grid grid-cols-6 grid-rows-6 gap-3">
-                        <div className="relative col-span-4 row-span-6 overflow-hidden rounded-lg border border-teal-400/30">
-                            <img src={hackathonImg} alt="Hackathon main photo" className="h-full w-full object-cover" loading="lazy" />
-                        </div>
-                        <div className="relative col-span-2 row-span-3 overflow-hidden rounded-lg border border-teal-400/30">
-                            <img src={img1} alt="Press feature photo" className="h-full w-full object-cover" loading="lazy" />
-                        </div>
-                        <div className="relative col-span-2 row-span-3 overflow-hidden rounded-lg border border-teal-400/30">
-                            <img src={img2} alt="Event photo 2" className="h-full w-full object-cover" loading="lazy" />
-                        </div>
-                        <div className="relative col-span-2 row-span-3 overflow-hidden rounded-lg border border-teal-400/30">
-                            <img src={img3} alt="Event photo 3" className="h-full w-full object-cover" loading="lazy" />
-                        </div>
-                        <div className="relative col-span-2 row-span-3 overflow-hidden rounded-lg border border-teal-400/30">
-                            <img src={img4} alt="Event photo 4" className="h-full w-full object-cover" loading="lazy" />
-                        </div>
-                        <div className="relative col-span-2 row-span-3 overflow-hidden rounded-lg border border-teal-400/30">
-                            <img src={img5} alt="Event photo 5" className="h-full w-full object-cover" loading="lazy" />
-                        </div>
-                    </div>
-                </article>
-
-                <p className="mt-6 text-center text-xs text-slate-400">
-                    All photos above are from the same event. More achievements coming soon.
-                </p>
+                            <div className="flex items-start gap-4">
+                                <div className="text-[#12B7C9] font-bold text-xl">{index + 1}.</div>
+                                <div className="flex-1">
+                                    <h3 className="text-xl font-bold text-white mb-2">{achievement.title}</h3>
+                                    <p className="text-slate-300 leading-relaxed">{achievement.description}</p>
+                                    {achievement.link && (
+                                        <a
+                                            href={achievement.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 mt-3 text-[#12B7C9] hover:text-[#12B7C9]/80 transition-colors text-sm"
+                                        >
+                                            <span>Read article</span>
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </motion.div>
             </div>
         </section>
     );

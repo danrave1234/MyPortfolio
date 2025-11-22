@@ -24,26 +24,10 @@ const achievements = [
         title: "Featured in Cebu Daily News",
         description: "Recognized for innovation in software engineering and rapid prototyping.",
         link: "https://cebudailynews.inquirer.net/659355/reimagining-play-powering-the-future-proweavers-promptquest-showcases-cebuano-talent-in-tech?utm_source=dlvr.it&utm_medium=facebook",
-        images: [achievementImg1, achievementImg2],
+        images: [achievementImg1, achievementImg2, achievementImg3, achievementImg4, achievementImg5],
         type: "media",
         icon: "📰",
         badge: "Recognition",
-    },
-    {
-        title: "System Deployments",
-        description: "Multiple deployed platforms used by real users and teams.",
-        images: [achievementImg3, achievementImg4],
-        type: "deployment",
-        icon: "🚀",
-        badge: "Production",
-    },
-    {
-        title: "Client Work",
-        description: "jpmorada.photography and other freelance systems",
-        images: [achievementImg5],
-        type: "client",
-        icon: "💼",
-        badge: "Freelance",
     },
 ];
 

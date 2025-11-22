@@ -11,12 +11,15 @@ import LLMImg8 from "../assets/LLM8.png";
 import LLMImg9 from "../assets/LLM9.png";
 import LLMImg10 from "../assets/LLM10.png";
 import LLMImg11 from "../assets/LLM11.png";
+import achievementImg3 from "../assets/achievements3.png";
+import achievementImg4 from "../assets/achievements4.png";
+import achievementImg5 from "../assets/achievements5.png";
 
-const projects = [
-    {
+    const projects = [
+        {
         title: "Qualitidex",
         subtitle: "AI-powered QA Automation System",
-        featured: true,
+            featured: true,
         category: "Production System",
         description: "A full-stack platform that generates, executes, and manages automated test cases using AI. Designed for teams that need rapid QA cycles without manual work.",
         keyFeatures: [
@@ -169,6 +172,71 @@ const projects = [
         ],
         link: "https://wildcat-radio.live",
         images: [LLMImg1, LLMImg2, LLMImg3], // Placeholder - replace with actual Wildcats Radio images
+    },
+];
+
+const otherProjects = [
+    {
+        title: "System Deployments",
+        subtitle: "Production-Ready Platforms",
+        featured: false,
+        category: "Deployment",
+        description: "Multiple deployed platforms used by real users and teams. These systems demonstrate end-to-end development capabilities from design to deployment.",
+        keyFeatures: [
+            "Cloud-native architecture",
+            "Scalable infrastructure",
+            "CI/CD pipelines",
+            "Production monitoring",
+            "User authentication systems",
+            "Database optimization",
+        ],
+        tech: [
+            "AWS / Google Cloud",
+            "Docker & Containers",
+            "GitHub Actions",
+            "PostgreSQL / MySQL",
+            "React / Next.js",
+            "REST APIs",
+        ],
+        responsibilities: [
+            "Full-stack development",
+            "Infrastructure setup",
+            "Deployment automation",
+            "Performance optimization",
+        ],
+        link: null,
+        images: [achievementImg3, achievementImg4],
+    },
+    {
+        title: "Client Work",
+        subtitle: "Freelance Development Projects",
+        featured: false,
+        category: "Freelance",
+        description: "jpmorada.photography and other freelance systems built for clients. Custom solutions tailored to specific business needs.",
+        keyFeatures: [
+            "Custom web applications",
+            "Client-specific requirements",
+            "Responsive design",
+            "SEO optimization",
+            "Performance tuning",
+            "Maintenance & support",
+        ],
+        tech: [
+            "React / Next.js",
+            "Tailwind CSS",
+            "Node.js / Express",
+            "MongoDB / PostgreSQL",
+            "Cloud hosting",
+            "Domain management",
+        ],
+        responsibilities: [
+            "Client consultation",
+            "Full development lifecycle",
+            "Deployment & hosting",
+            "Ongoing maintenance",
+        ],
+        link: "https://jpmorada.photography",
+        images: [achievementImg5],
     },
 ];
 
@@ -444,6 +512,7 @@ function Projects() {
     };
 
     const featuredProjects = projects.filter(p => p.featured);
+    const allProjects = [...featuredProjects, ...otherProjects];
 
     const setCurrentImageIndex = (projectIndex, imageIndex) => {
         setCurrentImageIndices((prev) => ({
@@ -500,6 +569,48 @@ function Projects() {
                     <div className="text-center text-slate-400 py-20">
                         <p>No projects found</p>
                     </div>
+                )}
+
+                {/* Other Projects Section */}
+                {otherProjects.length > 0 && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="mt-20"
+                    >
+                        <motion.h3
+                            className="text-2xl sm:text-3xl font-bold text-[#12B7C9] mb-6 text-center"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4 }}
+                        >
+                            Additional Projects
+                        </motion.h3>
+                        <motion.div
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.1 }}
+                            className="space-y-12"
+                        >
+                            {otherProjects.map((project, index) => {
+                                const projectIndex = featuredProjects.length + index;
+                                return (
+                                    <ProjectCard
+                                        key={projectIndex}
+                                        project={project}
+                                        index={projectIndex}
+                                        currentImageIndex={currentImageIndices[projectIndex] || 0}
+                                        setCurrentImageIndex={(idx) => setCurrentImageIndex(projectIndex, idx)}
+                                        cardVariants={cardVariants}
+                                    />
+                                );
+                            })}
+                        </motion.div>
+                    </motion.div>
                 )}
             </div>
         </section>

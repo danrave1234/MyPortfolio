@@ -159,19 +159,35 @@ import achievementImg5 from "../assets/achievements5.png";
             "Branded UI for CIT-U",
         ],
         tech: [
-            "React",
-            "Tailwind",
-            "Streaming Server",
-            "Cloudflare",
+            "React (Vercel)",
+            "Spring Boot",
+            "Icecast Streaming Server",
+            "Neon PostgreSQL",
+            "Google Cloud Storage",
+            "BUTT Encoder",
         ],
         responsibilities: [
             "Frontend development",
+            "Backend API development",
             "Streaming integration",
             "UI/UX design",
             "Cloud deployment",
         ],
         link: "https://wildcat-radio.live",
         images: [LLMImg1, LLMImg2, LLMImg3], // Placeholder - replace with actual Wildcats Radio images
+        architecture: {
+            title: "Wildcats Radio Architecture",
+            description: "Production-grade streaming architecture combining live audio streaming server, modern frontend, Spring Boot backend, and serverless PostgreSQL database. The broadcast is encoded using BUTT and streamed to an Icecast server hosted on a Google Cloud VM.",
+            components: [
+                { name: "Studio Source", type: "BUTT Encoder", details: "Broadcast origin, encodes audio (MP3/AAC)" },
+                { name: "Streaming Server", type: "Icecast on GCP VM", details: "Receives live feed, serves public mountpoint" },
+                { name: "Frontend", type: "React.js (Vercel)", details: "Audio player, schedule UI, metadata display" },
+                { name: "Backend API", type: "Spring Boot", details: "REST API for shows, schedule, metadata" },
+                { name: "Database", type: "Neon PostgreSQL", details: "Serverless Postgres for schedule & DJ data" },
+                { name: "Storage", type: "GCS Bucket", details: "DJ photos, logos, static assets" },
+            ],
+            flow: "Studio broadcast uses BUTT encoder to send MP3/AAC stream to Icecast server on Google Cloud VM. React frontend on Vercel connects directly to Icecast live stream and fetches schedule/metadata from Spring Boot backend. Backend queries Neon PostgreSQL for show schedules and DJ information. Images and media assets are served from Google Cloud Storage bucket via public URLs.",
+        },
     },
 ];
 

@@ -11,8 +11,6 @@ import LLMImg8 from "../assets/LLM8.png";
 import LLMImg9 from "../assets/LLM9.png";
 import LLMImg10 from "../assets/LLM10.png";
 import LLMImg11 from "../assets/LLM11.png";
-import achievementImg3 from "../assets/achievements3.png";
-import achievementImg4 from "../assets/achievements4.png";
 import achievementImg5 from "../assets/achievements5.png";
 
     const projects = [
@@ -193,66 +191,49 @@ import achievementImg5 from "../assets/achievements5.png";
 
 const otherProjects = [
     {
-        title: "System Deployments",
-        subtitle: "Production-Ready Platforms",
+        title: "jpmorada.photography",
+        subtitle: "Professional Photography Portfolio Platform",
         featured: false,
-        category: "Deployment",
-        description: "Multiple deployed platforms used by real users and teams. These systems demonstrate end-to-end development capabilities from design to deployment.",
+        category: "Client Work",
+        description: "A modern photography portfolio website showcasing professional work with image galleries, client galleries, and contact functionality. Built with React and deployed on Firebase for fast, reliable performance.",
         keyFeatures: [
-            "Cloud-native architecture",
-            "Scalable infrastructure",
-            "CI/CD pipelines",
-            "Production monitoring",
-            "User authentication systems",
-            "Database optimization",
+            "Image gallery with optimized loading",
+            "Client-specific gallery access",
+            "Responsive design for all devices",
+            "Fast image delivery via Firebase Storage",
+            "Contact form integration",
+            "SEO optimized",
         ],
         tech: [
-            "AWS / Google Cloud",
-            "Docker & Containers",
-            "GitHub Actions",
-            "PostgreSQL / MySQL",
-            "React / Next.js",
-            "REST APIs",
+            "React",
+            "Firebase Hosting",
+            "Firebase Storage",
+            "Firebase Functions",
+            "Tailwind CSS",
+            "Image optimization",
         ],
         responsibilities: [
             "Full-stack development",
-            "Infrastructure setup",
-            "Deployment automation",
-            "Performance optimization",
-        ],
-        link: null,
-        images: [achievementImg3, achievementImg4],
-    },
-    {
-        title: "Client Work",
-        subtitle: "Freelance Development Projects",
-        featured: false,
-        category: "Freelance",
-        description: "jpmorada.photography and other freelance systems built for clients. Custom solutions tailored to specific business needs.",
-        keyFeatures: [
-            "Custom web applications",
-            "Client-specific requirements",
-            "Responsive design",
-            "SEO optimization",
-            "Performance tuning",
-            "Maintenance & support",
-        ],
-        tech: [
-            "React / Next.js",
-            "Tailwind CSS",
-            "Node.js / Express",
-            "MongoDB / PostgreSQL",
-            "Cloud hosting",
-            "Domain management",
-        ],
-        responsibilities: [
-            "Client consultation",
-            "Full development lifecycle",
+            "Firebase infrastructure setup",
+            "Image optimization & storage",
             "Deployment & hosting",
-            "Ongoing maintenance",
+            "Client consultation",
         ],
         link: "https://jpmorada.photography",
         images: [achievementImg5],
+        architecture: {
+            title: "jpmorada.photography Architecture",
+            description: "Serverless architecture built on Firebase platform. React frontend is hosted on Firebase Hosting with global CDN, images are stored and served from Firebase Storage, and backend logic is handled by Firebase Functions.",
+            components: [
+                { name: "Frontend", type: "React", details: "Responsive portfolio interface" },
+                { name: "Hosting", type: "Firebase Hosting", details: "Global CDN, fast delivery" },
+                { name: "Storage", type: "Firebase Storage", details: "Image galleries & assets" },
+                { name: "Functions", type: "Firebase Functions", details: "Backend logic & API" },
+                { name: "CDN", type: "Firebase CDN", details: "Global content delivery" },
+                { name: "Domain", type: "Custom Domain", details: "jpmorada.photography" },
+            ],
+            flow: "React frontend is deployed to Firebase Hosting which provides global CDN distribution. High-resolution photography images are stored in Firebase Storage and served via optimized URLs. Firebase Functions handle backend operations like contact form submissions and gallery access control. All services are integrated within the Firebase ecosystem for seamless performance and scalability.",
+        },
     },
 ];
 

@@ -55,7 +55,7 @@ export function Achievements() {
     const activeAchievement = achievements[activeIndex];
 
     return (
-        <Section id="achievements" className="bg-gray-900/20 overflow-hidden !py-0 !px-0 min-h-screen flex flex-col justify-center">
+        <Section id="achievements" className="overflow-hidden !py-0 !px-0 min-h-screen flex flex-col justify-center">
             <div className="relative z-10 w-full h-full flex flex-col justify-center">
                 <motion.div 
                     initial={{ opacity: 0 }}

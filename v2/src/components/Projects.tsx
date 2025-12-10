@@ -77,14 +77,14 @@ export function Projects() {
                 <motion.div 
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    className="text-center mb-4 sm:mb-6 md:mb-8 pt-6 sm:pt-8 md:pt-10 px-3 sm:px-4"
+                    className="text-center mb-6 md:mb-8 pt-10"
                 >
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#12B7C9] mb-1 sm:mb-2 leading-tight">Selected Projects</h2>
-                    <p className="text-slate-500 text-xs sm:text-sm md:text-base">Use <kbd className="bg-gray-800 px-1 rounded">←</kbd> <kbd className="bg-gray-800 px-1 rounded">→</kbd> to navigate</p>
+                    <h2 className="text-3xl md:text-5xl font-bold text-[#12B7C9] mb-2">Selected Projects</h2>
+                    <p className="text-slate-500 text-sm md:text-base">Use <kbd className="bg-gray-800 px-1 rounded">←</kbd> <kbd className="bg-gray-800 px-1 rounded">→</kbd> to navigate</p>
                 </motion.div>
 
                 {/* Deck View - Full Width */}
-                <div className="relative w-full h-[68vh] sm:h-[60vh] flex items-center justify-center perspective-1000 px-3 sm:px-4 md:px-8 lg:px-16 overflow-visible">
+                <div className="relative w-full h-[60vh] flex items-center justify-center perspective-1000 px-4 md:px-8 lg:px-16 overflow-visible">
                     {projects.map((project, index) => {
                         // Calculate relative position (no wrap-around)
                         const prevIndex = activeIndex > 0 ? activeIndex - 1 : null;
@@ -139,8 +139,9 @@ export function Projects() {
                                         opacity: { duration: 0.7, ease: [0.4, 0, 0.2, 1] }
                                     }}
                                     className={cn(
-                                        "absolute w-[94%] sm:w-[90%] md:w-[80%] max-w-5xl bg-gray-900 rounded-2xl overflow-hidden border border-white/10 shadow-2xl cursor-pointer group",
+                                        "absolute w-[90%] md:w-[80%] max-w-5xl bg-gray-900 rounded-2xl overflow-hidden border border-white/10 shadow-2xl cursor-pointer group",
                                         isActive ? "shadow-[#12B7C9]/20" : "grayscale-[30%]",
+                                        // Adjust aspect ratio here. Using generic aspect-video for standard monitor look
                                         "aspect-video"
                                     )}
                                     onClick={() => {
@@ -169,38 +170,29 @@ export function Projects() {
                                     </div>
 
                                     {/* Content Overlay - Bottom Aligned */}
-                                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 z-10 transform translate-y-1 sm:translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                         <div className="mb-2 sm:mb-3 hidden sm:flex flex-wrap gap-2">
-                                            <span className="px-3 py-1 bg-[#12B7C9]/20 text-[#12B7C9] text-[11px] sm:text-xs font-bold rounded-full border border-[#12B7C9]/20 backdrop-blur-sm">
+                                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 z-10 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                         <div className="mb-3">
+                                            <span className="px-3 py-1 bg-[#12B7C9]/20 text-[#12B7C9] text-xs font-bold rounded-full border border-[#12B7C9]/20 backdrop-blur-sm">
                                                 {project.category}
                                             </span>
                                         </div>
-                                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2 leading-tight line-clamp-1">{project.title}</h3>
-                                        <p className="text-[#12B7C9] text-sm sm:text-lg md:text-xl mb-3 sm:mb-4 font-medium leading-snug line-clamp-1">{project.subtitle}</p>
+                                        <h3 className="text-3xl md:text-5xl font-bold text-white mb-2">{project.title}</h3>
+                                        <p className="text-[#12B7C9] text-lg md:text-xl mb-4 font-medium">{project.subtitle}</p>
                                         
-                                        <p className="text-slate-300 text-xs sm:text-sm md:text-base line-clamp-1 mb-4 sm:mb-5 max-w-2xl">
+                                        <p className="text-slate-300 text-sm md:text-base line-clamp-2 md:line-clamp-3 mb-6 max-w-2xl">
                                             {project.description}
                                         </p>
                                         
-                                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
-                                            {/* Mobile: show fewer tech tags */}
-                                            <div className="flex sm:hidden items-center gap-1.5 overflow-x-auto whitespace-nowrap pr-1">
-                                                {project.tech.slice(0, 3).map(t => (
-                                                    <span key={t} className="text-[9px] text-slate-300 bg-black/50 px-1.5 py-0.5 rounded border border-white/10 backdrop-blur-sm">
-                                                        {t}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                            {/* Desktop/Tablet */}
-                                            <div className="hidden sm:flex items-center gap-1.5 overflow-x-auto whitespace-nowrap pr-2">
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex flex-wrap gap-2">
                                                 {project.tech.slice(0, 4).map(t => (
-                                                    <span key={t} className="text-[10px] text-slate-300 bg-black/50 px-1.5 py-0.5 rounded border border-white/10 backdrop-blur-sm">
+                                                    <span key={t} className="text-xs text-slate-300 bg-black/50 px-2 py-1 rounded border border-white/10 backdrop-blur-sm">
                                                         {t}
                                                     </span>
                                                 ))}
                                             </div>
                                             <button 
-                                                className="flex items-center justify-center gap-2 text-white bg-[#12B7C9] px-3 py-2 sm:px-4 sm:py-2 rounded-lg hover:bg-[#12B7C9]/90 transition-colors text-xs sm:text-sm font-bold shadow-lg shadow-[#12B7C9]/20 w-full sm:w-auto"
+                                                className="flex items-center gap-2 text-white bg-[#12B7C9] px-4 py-2 rounded-lg hover:bg-[#12B7C9]/90 transition-colors text-sm font-bold shadow-lg shadow-[#12B7C9]/20"
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     setIsExpanded(true);
@@ -214,7 +206,7 @@ export function Projects() {
                             );
                         })}
 
-                    {/* Navigation Buttons */}
+                    {/* Navigation Buttons - Disabled at start/end */}
                     <button 
                         onClick={prevProject}
                         disabled={activeIndex === 0}
@@ -244,7 +236,7 @@ export function Projects() {
                 </div>
 
                 {/* Dot Indicators */}
-                <div className="flex justify-center gap-2 mt-5 sm:mt-6 md:mt-8 pb-10">
+                <div className="flex justify-center gap-2 mt-6 md:mt-8 pb-10">
                     {projects.map((_, index) => (
                         <button
                             key={index}
@@ -271,14 +263,14 @@ export function Projects() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[60] flex items-center justify-center p-4 md:p-10 bg-black/50 backdrop-blur-md"
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10 bg-black/50 backdrop-blur-md"
                         onClick={() => setIsExpanded(false)}
                     >
                         <motion.div 
                             initial={{ scale: 0.9, y: 50 }}
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 50 }}
-                            className="bg-gray-900 w-full max-w-6xl max-h-[90vh] rounded-2xl overflow-y-auto border border-white/10 shadow-2xl relative pb-10"
+                            className="bg-gray-900 w-full max-w-6xl max-h-[90vh] rounded-2xl overflow-y-auto border border-white/10 shadow-2xl relative"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <button 
@@ -288,54 +280,39 @@ export function Projects() {
                                 <X className="w-6 h-6" />
                             </button>
 
-                            <div className="flex flex-col">
-                                {/* Top: Single Image Preview */}
-                                <div className="bg-black relative p-4 sm:p-6 lg:p-8 border-b border-white/10">
-                                    {activeProject.images.slice(0, 1).map((img) => (
-                                        <div
-                                            key={img}
-                                            className="relative w-full max-w-4xl mx-auto aspect-[16/10] sm:aspect-video lg:max-h-[420px] rounded-xl overflow-hidden border border-white/5"
-                                        >
-                                            <Image
-                                                src={img}
-                                                alt={activeProject.title}
-                                                fill
-                                                className="object-contain bg-black"
-                                                sizes="100vw"
-                                            />
-                                        </div>
-                                    ))}
+                            <div className="grid grid-cols-1 lg:grid-cols-2">
+                                {/* Left: Images */}
+                                <div className="bg-black relative p-4 flex flex-col gap-4 lg:border-r border-white/10">
+                                     {activeProject.images.map((img, idx) => (
+                                         <div key={idx} className="relative w-full aspect-video rounded-lg overflow-hidden border border-white/5">
+                                             <Image 
+                                                src={img} 
+                                                alt="" 
+                                                fill 
+                                                className="object-contain bg-black" 
+                                                sizes="(max-width: 1024px) 100vw, 50vw"
+                                             />
+                                         </div>
+                                     ))}
                                 </div>
 
-                                {/* Bottom: Details */}
-                                <div className="p-6 sm:p-7 lg:p-8 space-y-6">
-                                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-                                        <div>
-                                            <h2 className="text-2xl sm:text-3xl font-bold text-white">{activeProject.title}</h2>
-                                            <p className="text-[#12B7C9] text-lg sm:text-xl">{activeProject.subtitle}</p>
-                                        </div>
-                                        {activeProject.link && (
-                                            <a
-                                                href={activeProject.link}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#12B7C9] text-white rounded-lg font-semibold hover:bg-[#12B7C9]/80 transition-colors whitespace-nowrap"
-                                            >
-                                                View Live Website <ExternalLink className="w-5 h-5" />
-                                            </a>
-                                        )}
+                                {/* Right: Details */}
+                                <div className="p-8 lg:p-10 space-y-8">
+                                    <div>
+                                        <h2 className="text-3xl font-bold text-white mb-2">{activeProject.title}</h2>
+                                        <p className="text-[#12B7C9] text-xl">{activeProject.subtitle}</p>
                                     </div>
 
                                     {activeProject.problemSolved && (
-                                        <div className="space-y-2.5">
+                                        <div className="space-y-4">
                                             <h3 className="font-semibold text-white">Problem Solved</h3>
                                             <p className="text-slate-300 text-sm leading-relaxed">{activeProject.problemSolved}</p>
                                         </div>
                                     )}
 
-                                    <div className="space-y-2.5">
+                                    <div className="space-y-4">
                                         <h3 className="font-semibold text-white">Key Features</h3>
-                                        <ul className="grid grid-cols-1 gap-1.5">
+                                        <ul className="grid grid-cols-1 gap-2">
                                             {activeProject.keyFeatures.map((f, i) => (
                                                 <li key={i} className="flex items-start text-slate-300 text-sm">
                                                     <span className="text-[#12B7C9] mr-2">•</span> {f}
@@ -344,14 +321,11 @@ export function Projects() {
                                         </ul>
                                     </div>
 
-                                    <div className="space-y-2.5">
+                                    <div className="space-y-4">
                                         <h3 className="font-semibold text-white">Tech Stack</h3>
                                         <div className="flex flex-wrap gap-2">
                                             {activeProject.tech.map((t, i) => (
-                                                <span
-                                                    key={i}
-                                                    className="px-2.5 py-1 bg-gray-800 rounded text-xs text-slate-300 border border-white/5"
-                                                >
+                                                <span key={i} className="px-3 py-1 bg-gray-800 rounded text-xs text-slate-300 border border-white/5">
                                                     {t}
                                                 </span>
                                             ))}
@@ -359,12 +333,22 @@ export function Projects() {
                                     </div>
 
                                     {activeProject.architecture && (
-                                        <div className="p-3.5 bg-black/30 rounded-xl border border-white/5">
+                                        <div className="p-4 bg-black/30 rounded-xl border border-white/5">
                                             <h3 className="text-[#12B7C9] font-bold mb-2 text-base">System Architecture</h3>
                                             <p className="text-slate-300 text-sm leading-relaxed">{activeProject.architecture.flow}</p>
                                         </div>
                                     )}
 
+                                    {activeProject.link && (
+                                        <a 
+                                            href={activeProject.link} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 px-6 py-3 bg-[#12B7C9] text-white rounded-lg font-bold hover:bg-[#12B7C9]/80 transition-colors"
+                                        >
+                                            View Live Website <ExternalLink className="w-5 h-5" />
+                                        </a>
+                                    )}
                                 </div>
                             </div>
                         </motion.div>

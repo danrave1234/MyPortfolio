@@ -46,3 +46,11 @@ export interface NavItem {
     href: string;
     shortcut?: string;
 }
+
+export interface Testimonial {
+    name: string;
+    role: string;
+    company?: string;
+    quote: string;
+    relationship?: string;
+}

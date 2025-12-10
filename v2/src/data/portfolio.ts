@@ -1,4 +1,4 @@
-import { Project, Achievement, Capability, NavItem } from "@/types";
+import { Project, Achievement, Capability, NavItem, Testimonial } from "@/types";
 import { FaGraduationCap, FaNewspaper, FaTrophy } from "react-icons/fa6";
 
 export const projects: Project[] = [
@@ -308,4 +308,28 @@ export const navItems: NavItem[] = [
     { label: 'Projects', href: '#projects', shortcut: 'P' },
     { label: 'Achievements', href: '#achievements', shortcut: 'H' }, // H for Honors/Hackathons
     { label: 'Contact', href: '#contact', shortcut: 'T' }, // T for Talk
+];
+
+export const testimonials: Testimonial[] = [
+    {
+        name: "Zach Banks",
+        role: "Team Lead",
+        company: "StudyBoost.com",
+        quote: "As team lead, I relied on Danrave to ship StudyBoost features fast and keep releases on track. He owned the stack, unblocked teammates, and delivered production-ready code without handholding.",
+        relationship: "Team lead & engineering partner",
+    },
+    {
+        name: "John Philip Morada",
+        role: "Founder",
+        company: "jpmorada.photography",
+        quote: "Danrave turned my portfolio vision into a polished site that loads fast and works flawlessly for my clients. He iterated quickly on feedback and treated the launch like it was his own brand.",
+        relationship: "Client project delivery",
+    },
+    {
+        name: "Coach Daniel Cruz",
+        role: "Faculty Adviser",
+        company: "CIT University — Mass Communication",
+        quote: "For our Mass Communication Wildcats Radio project, he handled streaming, backend, and UI under tight deadlines. When blockers appeared, he solved them without drama and kept the team moving.",
+        relationship: "Capstone adviser & stakeholder",
+    },
 ];

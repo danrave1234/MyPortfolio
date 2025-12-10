@@ -278,7 +278,7 @@ export function Projects() {
                             initial={{ scale: 0.9, y: 50 }}
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 50 }}
-                            className="bg-gray-900 w-full max-w-6xl max-h-[90vh] rounded-2xl overflow-y-auto border border-white/10 shadow-2xl relative pb-16 sm:pb-10"
+                            className="bg-gray-900 w-full max-w-6xl max-h-[90vh] rounded-2xl overflow-y-auto border border-white/10 shadow-2xl relative pb-10"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <button 
@@ -288,39 +288,54 @@ export function Projects() {
                                 <X className="w-6 h-6" />
                             </button>
 
-                            <div className="grid grid-cols-1 lg:grid-cols-2">
-                                {/* Left: Single Image */}
-                                <div className="bg-black relative p-4 flex flex-col gap-4 lg:border-r border-white/10">
-                                     {activeProject.images.slice(0, 1).map((img) => (
-                                         <div key={img} className="relative w-full aspect-video rounded-lg overflow-hidden border border-white/5">
-                                             <Image 
-                                                src={img} 
-                                                alt="" 
-                                                fill 
-                                                className="object-contain bg-black" 
-                                                sizes="(max-width: 1024px) 100vw, 50vw"
-                                             />
-                                         </div>
-                                     ))}
+                            <div className="flex flex-col">
+                                {/* Top: Single Image Preview */}
+                                <div className="bg-black relative p-4 sm:p-6 lg:p-8 border-b border-white/10">
+                                    {activeProject.images.slice(0, 1).map((img) => (
+                                        <div
+                                            key={img}
+                                            className="relative w-full max-w-4xl mx-auto aspect-[16/10] sm:aspect-video lg:max-h-[420px] rounded-xl overflow-hidden border border-white/5"
+                                        >
+                                            <Image
+                                                src={img}
+                                                alt={activeProject.title}
+                                                fill
+                                                className="object-contain bg-black"
+                                                sizes="100vw"
+                                            />
+                                        </div>
+                                    ))}
                                 </div>
 
-                                {/* Right: Details */}
-                                <div className="p-8 lg:p-10 space-y-8">
-                                    <div>
-                                        <h2 className="text-3xl font-bold text-white mb-2">{activeProject.title}</h2>
-                                        <p className="text-[#12B7C9] text-xl">{activeProject.subtitle}</p>
+                                {/* Bottom: Details */}
+                                <div className="p-6 sm:p-7 lg:p-8 space-y-6">
+                                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                                        <div>
+                                            <h2 className="text-2xl sm:text-3xl font-bold text-white">{activeProject.title}</h2>
+                                            <p className="text-[#12B7C9] text-lg sm:text-xl">{activeProject.subtitle}</p>
+                                        </div>
+                                        {activeProject.link && (
+                                            <a
+                                                href={activeProject.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#12B7C9] text-white rounded-lg font-semibold hover:bg-[#12B7C9]/80 transition-colors whitespace-nowrap"
+                                            >
+                                                View Live Website <ExternalLink className="w-5 h-5" />
+                                            </a>
+                                        )}
                                     </div>
 
                                     {activeProject.problemSolved && (
-                                        <div className="space-y-4">
+                                        <div className="space-y-2.5">
                                             <h3 className="font-semibold text-white">Problem Solved</h3>
                                             <p className="text-slate-300 text-sm leading-relaxed">{activeProject.problemSolved}</p>
                                         </div>
                                     )}
 
-                                    <div className="space-y-4">
+                                    <div className="space-y-2.5">
                                         <h3 className="font-semibold text-white">Key Features</h3>
-                                        <ul className="grid grid-cols-1 gap-2">
+                                        <ul className="grid grid-cols-1 gap-1.5">
                                             {activeProject.keyFeatures.map((f, i) => (
                                                 <li key={i} className="flex items-start text-slate-300 text-sm">
                                                     <span className="text-[#12B7C9] mr-2">•</span> {f}
@@ -329,11 +344,14 @@ export function Projects() {
                                         </ul>
                                     </div>
 
-                                    <div className="space-y-4">
+                                    <div className="space-y-2.5">
                                         <h3 className="font-semibold text-white">Tech Stack</h3>
                                         <div className="flex flex-wrap gap-2">
                                             {activeProject.tech.map((t, i) => (
-                                                <span key={i} className="px-3 py-1 bg-gray-800 rounded text-xs text-slate-300 border border-white/5">
+                                                <span
+                                                    key={i}
+                                                    className="px-2.5 py-1 bg-gray-800 rounded text-xs text-slate-300 border border-white/5"
+                                                >
                                                     {t}
                                                 </span>
                                             ))}
@@ -341,22 +359,12 @@ export function Projects() {
                                     </div>
 
                                     {activeProject.architecture && (
-                                        <div className="p-4 bg-black/30 rounded-xl border border-white/5">
+                                        <div className="p-3.5 bg-black/30 rounded-xl border border-white/5">
                                             <h3 className="text-[#12B7C9] font-bold mb-2 text-base">System Architecture</h3>
                                             <p className="text-slate-300 text-sm leading-relaxed">{activeProject.architecture.flow}</p>
                                         </div>
                                     )}
 
-                                    {activeProject.link && (
-                                        <a 
-                                            href={activeProject.link} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 px-6 py-3 bg-[#12B7C9] text-white rounded-lg font-bold hover:bg-[#12B7C9]/80 transition-colors"
-                                        >
-                                            View Live Website <ExternalLink className="w-5 h-5" />
-                                        </a>
-                                    )}
                                 </div>
                             </div>
                         </motion.div>

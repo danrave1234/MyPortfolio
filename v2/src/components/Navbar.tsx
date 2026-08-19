@@ -1,122 +1,148 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform, MotionValue } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  MotionValue,
+} from "framer-motion";
 import { useRef, useState } from "react";
-import { User, Code2, FolderOpen, Trophy, Mail, FileText } from "lucide-react";
+import {
+  User,
+  Briefcase,
+  Code2,
+  FolderOpen,
+  Trophy,
+  Mail,
+  FileText,
+} from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { navItems } from "@/data/portfolio";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+
+const ICONS: Record<string, typeof User> = {
+  About: User,
+  Experience: Briefcase,
+  Capabilities: Code2,
+  Projects: FolderOpen,
+  Achievements: Trophy,
+  Contact: Mail,
+  Resume: FileText,
+};
 
 export function Navbar({ activeSection }: { activeSection?: string }) {
-  let mouseX = useMotionValue(Infinity);
+  const mouseX = useMotionValue(Infinity);
+  // Magnification needs both a cursor to drive it and enough room to grow
+  // into. Below 640px the dock is already close to the viewport width, so
+  // growing an icon to 68px would push the last one off screen.
+  const fine = useMediaQuery("(pointer: fine) and (min-width: 640px)");
+
+  const items = [
+    // Root-relative ("/#about", not "#about") so the dock still works from
+    // routes other than "/" — otherwise it is inert on the 404 page.
+    ...navItems.map((i) => ({ ...i, href: `/${i.href}`, external: false })),
+    { label: "Resume", href: "/danrave-keh-resume.pdf", external: true },
+  ];
 
   return (
-    <motion.div
-      className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex h-16 items-end gap-4 rounded-2xl bg-gray-900/80 px-4 pb-3 backdrop-blur-md border border-white/10"
-      onMouseMove={(e) => mouseX.set(e.pageX)}
-      onMouseLeave={() => mouseX.set(Infinity)}
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
+    <nav
+      aria-label="Section navigation"
+      className="fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2"
     >
-      {navItems.map((item) => {
-        const sectionId = item.href.replace('#', '');
-        const isActive = activeSection === sectionId;
-        return (
-          <DockIcon 
-            key={item.label} 
-            mouseX={mouseX} 
-            item={item} 
-            isActive={isActive}
-          />
-        );
-      })}
-      {/* Separator */}
-      <div className="h-8 w-[1px] bg-white/10 mb-1 mx-1" />
-      <DockIcon 
-        mouseX={mouseX} 
-        item={{ label: 'Resume', href: '/Resume with QR with picture.pdf', shortcut: 'R' }} 
-        icon={<FileText className="h-full w-full text-white" />}
-        isExternal
-      />
-    </motion.div>
+      <motion.div
+        onMouseMove={(e) => fine && mouseX.set(e.pageX)}
+        onMouseLeave={() => mouseX.set(Infinity)}
+        initial={{ y: 80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.4, type: "spring", stiffness: 260, damping: 24 }}
+        className={cn(
+          "flex max-w-full items-end gap-0.5 overflow-x-auto rounded-2xl border border-line bg-[#0d0f13]/85 px-1.5 py-2 backdrop-blur-xl",
+          "shadow-[0_8px_32px_rgba(0,0,0,0.5)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+          "sm:gap-2 sm:px-3"
+        )}
+      >
+        {items.map((item, i) => (
+          <div key={item.label} className="flex items-end">
+            {item.external && (
+              <div className="mx-0.5 mb-3 h-6 w-px shrink-0 bg-line sm:mx-1.5" />
+            )}
+            <DockIcon
+              mouseX={mouseX}
+              fine={fine}
+              item={item}
+              isActive={activeSection === item.href.replace("/#", "")}
+              index={i}
+            />
+          </div>
+        ))}
+      </motion.div>
+    </nav>
   );
 }
 
-function DockIcon({ 
-    mouseX, 
-    item, 
-    icon,
-    isExternal,
-    isActive = false
-}: { 
-    mouseX: MotionValue; 
-    item: { label: string; href: string; shortcut?: string }; 
-    icon?: React.ReactNode; 
-    isExternal?: boolean;
-    isActive?: boolean;
+function DockIcon({
+  mouseX,
+  fine,
+  item,
+  isActive,
+}: {
+  mouseX: MotionValue;
+  fine: boolean;
+  item: { label: string; href: string; external: boolean };
+  isActive: boolean;
+  index: number;
 }) {
-  let ref = useRef<HTMLDivElement>(null);
-
-  let distance = useTransform(mouseX, (val) => {
-    let bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
-    return val - bounds.x - bounds.width / 2;
-  });
-
-  let widthSync = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
-  let width = useSpring(widthSync, { mass: 0.1, stiffness: 150, damping: 12 });
-
+  const ref = useRef<HTMLAnchorElement>(null);
   const [hovered, setHovered] = useState(false);
 
-  const getIcon = (label: string, className?: string) => {
-    const iconClass = className || "h-full w-full";
-    switch (label) {
-      case 'About': return <User className={iconClass} />;
-      case 'Capabilities': return <Code2 className={iconClass} />;
-      case 'Projects': return <FolderOpen className={iconClass} />;
-      case 'Achievements': return <Trophy className={iconClass} />;
-      case 'Contact': return <Mail className={iconClass} />;
-      default: return <User className={iconClass} />;
-    }
-  };
+  const distance = useTransform(mouseX, (val) => {
+    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
+    return val - bounds.x - bounds.width / 2;
+  });
+  const widthSync = useTransform(distance, [-140, 0, 140], [44, 68, 44]);
+  const width = useSpring(widthSync, { mass: 0.1, stiffness: 150, damping: 12 });
+
+  const Icon = ICONS[item.label] ?? User;
 
   return (
-    <div className="relative flex flex-col items-center">
-        {/* Tooltip */}
-        {hovered && (
-             <motion.div 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                className="absolute -top-10 px-2 py-1 bg-black/90 text-white text-xs rounded border border-white/10 whitespace-nowrap pointer-events-none"
-             >
-                {item.label}
-             </motion.div>
-        )}
-        
-        <Link href={item.href} target={isExternal ? "_blank" : undefined}>
-            <motion.div
-                ref={ref}
-                style={{ width }}
-                className={cn(
-                    "aspect-square rounded-full flex items-center justify-center border transition-colors cursor-pointer",
-                    isActive 
-                        ? "bg-[#12B7C9]/20 border-[#12B7C9]/50 shadow-lg shadow-[#12B7C9]/20" 
-                        : "bg-gray-800 border-white/10 hover:border-[#12B7C9]/50 hover:bg-gray-700"
-                )}
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-                whileTap={{ scale: 0.9 }}
-            >
-                <div className="h-1/2 w-1/2">
-                    {icon || getIcon(item.label, cn(
-                        "h-full w-full transition-colors",
-                        isActive ? "text-[#12B7C9]" : "text-white"
-                    ))}
-                </div>
-            </motion.div>
-        </Link>
+    <div className="relative flex shrink-0 flex-col items-center">
+      {fine && hovered && (
+        <motion.span
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="pointer-events-none absolute -top-9 whitespace-nowrap rounded-md border border-line bg-black/90 px-2 py-1 text-xs text-foreground"
+        >
+          {item.label}
+        </motion.span>
+      )}
+
+      <Link
+        ref={ref}
+        href={item.href}
+        target={item.external ? "_blank" : undefined}
+        rel={item.external ? "noopener noreferrer" : undefined}
+        aria-label={item.label}
+        aria-current={isActive ? "true" : undefined}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        className="block"
+      >
+        <motion.span
+          // Magnification only when there's a cursor to drive it. On touch the
+          // icon stays a fixed 44px — the minimum comfortable tap target.
+          style={fine ? { width } : undefined}
+          className={cn(
+            "flex aspect-square w-10 shrink-0 items-center justify-center rounded-xl border transition-colors sm:w-11",
+            isActive
+              ? "border-accent/50 bg-accent/15 text-accent"
+              : "border-line bg-white/[0.04] text-foreground/80 hover:border-accent/40 hover:text-accent"
+          )}
+        >
+          <Icon className="h-[45%] w-[45%]" strokeWidth={1.75} />
+        </motion.span>
+      </Link>
     </div>
   );
 }
-

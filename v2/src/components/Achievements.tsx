@@ -1,233 +1,155 @@
 "use client";
 
-import { Section } from "@/components/ui/Section";
-import { achievements } from "@/data/portfolio";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, ExternalLink, Trophy } from "lucide-react";
+import { Section, SectionHeader } from "@/components/ui/Section";
+import { Modal } from "@/components/ui/Modal";
+import { Gallery } from "@/components/ui/Gallery";
+import { achievements, certifications } from "@/data/portfolio";
+import { motion } from "framer-motion";
+import { ExternalLink, Trophy } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 export function Achievements() {
-    const [activeIndex, setActiveIndex] = useState(0);
-
-    const nextAchievement = () => {
-        setActiveIndex((prev) => {
-            if (prev < achievements.length - 1) {
-                return prev + 1;
-            }
-            return prev;
-        });
-    };
-
-    const prevAchievement = () => {
-        setActiveIndex((prev) => {
-            if (prev > 0) {
-                return prev - 1;
-            }
-            return prev;
-        });
-    };
-
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            const section = document.getElementById("achievements");
-            if (section) {
-                const rect = section.getBoundingClientRect();
-                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-                if (!isVisible) return;
-            }
-
-            if (e.key === "ArrowRight" && activeIndex < achievements.length - 1) {
-                e.preventDefault();
-                nextAchievement();
-            }
-            if (e.key === "ArrowLeft" && activeIndex > 0) {
-                e.preventDefault();
-                prevAchievement();
-            }
-        };
-
-        window.addEventListener("keydown", handleKeyDown);
-        return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [activeIndex]);
-
-    const activeAchievement = achievements[activeIndex];
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
+    const active = openIndex === null ? null : achievements[openIndex];
 
     return (
-        <Section id="achievements" className="overflow-hidden !py-0 !px-0 min-h-screen flex flex-col justify-center">
-            <div className="relative z-10 w-full h-full flex flex-col justify-center">
-                <motion.div 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    className="text-center mb-5 md:mb-8 pt-8 md:pt-10 px-4"
-                >
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#12B7C9] mb-2 leading-tight">Achievements</h2>
-                    <p className="text-slate-500 text-xs sm:text-sm md:text-base">Use <kbd className="bg-gray-800 px-1 rounded">←</kbd> <kbd className="bg-gray-800 px-1 rounded">→</kbd> to navigate</p>
-                </motion.div>
+        <Section id="achievements">
+            <SectionHeader
+                title="Achievements"
+                lead="Competitions, recognition, and certifications."
+            />
 
-                {/* Deck View */}
-                <div className="relative w-full h-[60vh] flex items-center justify-center perspective-1000 px-4 md:px-8 lg:px-16 overflow-visible">
-                    {achievements.map((achievement, index) => {
-                        const prevIndex = activeIndex > 0 ? activeIndex - 1 : null;
-                        const nextIndex = activeIndex < achievements.length - 1 ? activeIndex + 1 : null;
-                        
-                        if (index !== activeIndex && index !== prevIndex && index !== nextIndex) {
-                            return null;
-                        }
-
-                        const isActive = index === activeIndex;
-                        const isPrev = index === prevIndex;
-                        const isNext = index === nextIndex;
-                        const offsetFromActive = index - activeIndex;
-                        
-                        let xPosition = 0;
-                        if (offsetFromActive === -1) {
-                            xPosition = -35;
-                        } else if (offsetFromActive === 0) {
-                            xPosition = 0;
-                        } else if (offsetFromActive === 1) {
-                            xPosition = 35;
-                        }
-
-                        const isChampion = achievement.isChampion;
-
-                        return (
-                            <motion.div
-                                key={`achievement-${index}`}
-                                initial={{ 
-                                    x: offsetFromActive === -1 ? "-50%" : offsetFromActive === 1 ? "50%" : "0%",
-                                    opacity: 0,
-                                    scale: 0.85
-                                }}
-                                animate={{ 
-                                    scale: isActive ? 1 : 0.9, 
-                                    opacity: isActive ? 1 : 0.5,
-                                    x: `${xPosition}%`,
-                                    z: isActive ? 0 : -40,
-                                    rotateY: isActive ? 0 : offsetFromActive < 0 ? 2 : -2,
-                                    zIndex: isActive ? 20 : 10
-                                }}
-                                transition={{ 
-                                    duration: 0.7, 
-                                    ease: [0.4, 0, 0.2, 1],
-                                    x: { duration: 0.7, ease: [0.4, 0, 0.2, 1] },
-                                    scale: { duration: 0.7, ease: [0.4, 0, 0.2, 1] },
-                                    opacity: { duration: 0.7, ease: [0.4, 0, 0.2, 1] }
-                                }}
-                                className={cn(
-                                    "absolute w-[92%] sm:w-[88%] md:w-[80%] max-w-5xl bg-gray-900 rounded-2xl overflow-hidden border border-white/10 shadow-2xl cursor-pointer group",
-                                    isActive ? "shadow-[#12B7C9]/20" : "grayscale-[30%]",
-                                    isChampion ? "border-[#12B7C9]" : "",
-                                    "aspect-video"
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+                {achievements.map((achievement, index) => (
+                    <motion.article
+                        key={achievement.title}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.15 }}
+                        transition={{ delay: Math.min(index, 3) * 0.06, duration: 0.4 }}
+                        className={cn(
+                            "group flex flex-col overflow-hidden rounded-2xl border bg-surface/60 transition-colors",
+                            achievement.isChampion
+                                ? "border-accent/40"
+                                : "border-line hover:border-accent/25"
+                        )}
+                    >
+                        <button
+                            onClick={() => setOpenIndex(index)}
+                            className="flex flex-1 flex-col text-left"
+                        >
+                            <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-black">
+                                {achievement.images[0] && (
+                                    <Image
+                                        src={achievement.images[0]}
+                                        alt={`${achievement.title} photo`}
+                                        fill
+                                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                                        sizes="(max-width: 768px) 100vw, 380px"
+                                    />
                                 )}
-                                onClick={() => setActiveIndex(index)}
-                            >
-                                {/* Image Background */}
-                                <div className="absolute inset-0 bg-black">
-                                    {achievement.images[0] && (
-                                        <Image 
-                                            src={achievement.images[0]} 
-                                            alt={achievement.title} 
-                                            fill 
-                                            className="object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                                            sizes="(max-width: 768px) 90vw, (max-width: 1024px) 80vw, 1280px"
-                                            priority={isActive && index === 0}
-                                            loading={isActive && index === 0 ? "eager" : "lazy"}
+                                {achievement.isChampion && (
+                                    <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 text-xs font-bold text-[#04191c]">
+                                        <Trophy className="h-3 w-3" />
+                                        Champion
+                                    </span>
+                                )}
+                            </div>
+
+                            <div className="flex flex-1 flex-col p-5">
+                                <div className="flex items-center gap-2">
+                                    {achievement.icon && (
+                                        <achievement.icon
+                                            className="h-4 w-4 shrink-0 text-accent"
+                                            aria-hidden
                                         />
                                     )}
-                                    <div className={cn(
-                                        "absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent transition-opacity duration-300",
-                                        isActive ? "opacity-90" : "opacity-70"
-                                    )} />
+                                    <span className="text-xs font-semibold uppercase tracking-wide text-accent">
+                                        {achievement.badge}
+                                    </span>
                                 </div>
 
-                                {/* Content Overlay */}
-                                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 md:p-8 z-10 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                    <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-                                        {achievement.icon && (
-                                            <achievement.icon className="text-xl sm:text-2xl text-[#12B7C9]" />
-                                        )}
-                                        <span className="text-[11px] sm:text-xs uppercase tracking-wider text-[#12B7C9] font-bold border border-[#12B7C9]/30 px-2 py-1 rounded bg-[#12B7C9]/20 backdrop-blur-sm">
-                                            {achievement.badge}
-                                        </span>
-                                        {isChampion && (
-                                            <span className="flex items-center gap-1 px-2 py-1 bg-[#12B7C9] text-white text-[11px] sm:text-xs font-bold rounded">
-                                                <Trophy className="w-3 h-3" /> Champion
-                                            </span>
-                                        )}
-                                    </div>
-
-                                    <h3 className={cn("font-bold text-white mb-2 group-hover:text-[#12B7C9] transition-colors", isChampion ? "text-lg sm:text-xl md:text-2xl" : "text-base sm:text-lg md:text-xl")}>
-                                        {achievement.title}
-                                    </h3>
-                                    
-                                    <p className="text-slate-300 text-xs sm:text-sm md:text-base line-clamp-2 md:line-clamp-3 mb-3 sm:mb-4 max-w-2xl">
-                                        {achievement.description}
-                                    </p>
-
-                                    {achievement.link && (
-                                        <a 
-                                            href={achievement.link}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 text-sm font-medium text-[#12B7C9] hover:underline underline-offset-4"
-                                            onClick={(e) => e.stopPropagation()}
-                                        >
-                                            Read More <ExternalLink className="w-4 h-4" />
-                                        </a>
-                                    )}
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-
-                    {/* Navigation Buttons */}
-                    <button 
-                        onClick={prevAchievement}
-                        disabled={activeIndex === 0}
-                        className={cn(
-                            "absolute left-0 md:left-4 lg:left-8 xl:left-12 p-3 md:p-4 rounded-full bg-black/70 text-white transition-all z-50 backdrop-blur-md border border-white/20 shadow-lg",
-                            activeIndex === 0 
-                                ? "opacity-30 cursor-not-allowed" 
-                                : "hover:bg-[#12B7C9]/20 hover:scale-110 active:scale-95 cursor-pointer"
-                        )}
-                        aria-label="Previous achievement"
-                    >
-                        <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
-                    </button>
-                    <button 
-                        onClick={nextAchievement}
-                        disabled={activeIndex === achievements.length - 1}
-                        className={cn(
-                            "absolute right-0 md:right-4 lg:right-8 xl:right-12 p-3 md:p-4 rounded-full bg-black/70 text-white transition-all z-50 backdrop-blur-md border border-white/20 shadow-lg",
-                            activeIndex === achievements.length - 1 
-                                ? "opacity-30 cursor-not-allowed" 
-                                : "hover:bg-[#12B7C9]/20 hover:scale-110 active:scale-95 cursor-pointer"
-                        )}
-                        aria-label="Next achievement"
-                    >
-                        <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
-                    </button>
-                </div>
-
-                {/* Dot Indicators */}
-                <div className="flex justify-center gap-2 mt-6 md:mt-8 pb-10">
-                    {achievements.map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setActiveIndex(index)}
-                            className={cn(
-                                "transition-all duration-300 rounded-full",
-                                index === activeIndex
-                                    ? "w-3 h-3 bg-[#12B7C9] scale-125"
-                                    : "w-2 h-2 bg-white/30 hover:bg-white/50"
-                            )}
-                            aria-label={`Go to achievement ${index + 1}`}
-                        />
-                    ))}
-                </div>
+                                <h3 className="mt-2.5 text-base font-semibold leading-snug text-foreground">
+                                    {achievement.title}
+                                </h3>
+                                <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">
+                                    {achievement.description}
+                                </p>
+                            </div>
+                        </button>
+                    </motion.article>
+                ))}
             </div>
+
+            {/* Certifications: a dense list rather than more cards — they are
+                credentials, not stories, and this keeps the section short on a
+                phone. */}
+            <div className="mt-12 sm:mt-16">
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-foreground">
+                    Certifications
+                </h3>
+                <ul className="mt-4 divide-y divide-[var(--line)] rounded-2xl border border-line bg-surface/40">
+                    {certifications.map((cert) => (
+                        <li
+                            key={cert.name}
+                            className="flex flex-col gap-1 p-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+                        >
+                            <div className="min-w-0">
+                                <span className="block text-sm font-medium text-foreground">
+                                    {cert.name}
+                                </span>
+                                {cert.issuer && (
+                                    <span className="mt-0.5 block text-xs text-dim">
+                                        {cert.issuer}
+                                    </span>
+                                )}
+                            </div>
+                            <span className="shrink-0 font-mono text-xs text-muted">
+                                {cert.date}
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <Modal
+                open={active !== null}
+                onClose={() => setOpenIndex(null)}
+                label={active?.title ?? "Achievement details"}
+            >
+                {active && (
+                    <div className="space-y-6 p-5 pt-6 sm:p-6 lg:p-8">
+                        <header className="pr-12">
+                            <span className="text-xs font-semibold uppercase tracking-wide text-accent">
+                                {active.badge}
+                            </span>
+                            <h2 className="mt-2 text-xl font-bold leading-snug text-foreground sm:text-2xl">
+                                {active.title}
+                            </h2>
+                        </header>
+
+                        <Gallery images={active.images} alt={active.title} />
+
+                        <p className="text-sm leading-relaxed text-muted">
+                            {active.description}
+                        </p>
+
+                        {active.link && (
+                            <a
+                                href={active.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-line bg-white/[0.03] px-6 font-semibold text-foreground transition-colors hover:border-accent/40 hover:text-accent sm:w-auto"
+                            >
+                                Read the article
+                                <ExternalLink className="h-4 w-4" />
+                            </a>
+                        )}
+                    </div>
+                )}
+            </Modal>
         </Section>
     );
 }

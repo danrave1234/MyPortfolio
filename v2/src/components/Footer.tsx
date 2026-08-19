@@ -1,9 +1,11 @@
 export function Footer() {
     return (
-        <footer className="w-full py-8 bg-black/50 text-center text-slate-500 text-sm border-t border-white/5">
-            <p>© {new Date().getFullYear()} Danrave C. Keh. Built with Next.js & Framer Motion.</p>
+        <footer className="border-t border-line px-5 py-8">
+            {/* The bottom padding clears the floating dock plus the home
+                indicator, so the last line is never sitting under the nav. */}
+            <p className="mx-auto max-w-6xl pb-[calc(4.5rem+env(safe-area-inset-bottom))] text-center text-sm text-dim">
+                © {new Date().getFullYear()} Danrave C. Keh · Built with Next.js
+            </p>
         </footer>
     );
 }
-
-

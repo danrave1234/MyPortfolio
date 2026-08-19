@@ -1,72 +1,143 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+   Design tokens
+   Single accent, three ink levels, two surfaces, one border colour.
+   Everything in the UI should come from here rather than one-off hex values.
+--------------------------------------------------------------------------- */
 :root {
-  /* Dark mode default */
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  
-  /* Accent Color - Cyan from original design */
-  --accent: #12B7C9;
-  --accent-glow: rgba(18, 183, 201, 0.5);
+  --background: #08090b;
+  --surface: #101216;
+  --surface-hi: #16191f;
+
+  --foreground: #e9ebee;
+  --ink-muted: #9ba3ad;
+  --ink-dim: #7d8590;
+
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.14);
+
+  --accent: #12b7c9;
+  --accent-ink: #7fe3ee;
+  --accent-soft: rgba(18, 183, 201, 0.12);
+
+  /* Height of the floating nav, used to pad the bottom of the page so the
+     dock never sits on top of content. */
+  --dock-h: 4.5rem;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-hi: var(--surface-hi);
   --color-foreground: var(--foreground);
+  --color-muted: var(--ink-muted);
+  --color-dim: var(--ink-dim);
+  --color-line: var(--line);
   --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
   --font-sans: var(--font-manrope);
   --font-mono: var(--font-geist-mono);
 }
 
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-  scroll-padding-top: 0;
-}
-
-@media (min-width: 768px) {
-  html {
-    scroll-padding-top: 0;
-  }
+  /* Offset for in-page anchors. No scroll-snap: mandatory snapping fights
+     touch scrolling and breaks on short viewports. */
+  scroll-padding-top: 2rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), var(--font-poppins), "Poppins", sans-serif;
-  overflow-x: hidden;
-  selection-background-color: var(--accent);
-  selection-color: white;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  /* Prevent horizontal drift from wide children without hiding overflow on
+     html, which would break position: sticky. */
+  overflow-x: clip;
+  min-height: 100svh;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+/* Nothing should be able to push the page sideways on a narrow screen. */
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
 }
 
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
+::selection {
+  background: var(--accent);
+  color: #04191c;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #333;
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
+/* ---------------------------------------------------------------------------
+   Fluid type helpers — scale smoothly between 360px and 1280px viewports
+   instead of jumping at breakpoints.
+--------------------------------------------------------------------------- */
+.text-display {
+  font-size: clamp(2.25rem, 1.3rem + 4.2vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
 }
 
-.glow-text {
-  text-shadow: 0 0 20px var(--accent-glow);
+.text-heading {
+  font-size: clamp(1.75rem, 1.25rem + 2.2vw, 2.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
-/* Animated gradient background */
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 50%;
+.text-body {
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  line-height: 1.7;
+}
+
+/* ---------------------------------------------------------------------------
+   Scrollbar — thin, neutral, and only where the platform draws one.
+--------------------------------------------------------------------------- */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
   }
-  50% {
-    background-position: 100% 50%;
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2e35;
+    border-radius: 999px;
+    border: 2px solid var(--background);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a3f48;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Accessibility: honour the OS "reduce motion" setting everywhere, including
+   Framer Motion transforms.
+--------------------------------------------------------------------------- */
+/* Note: this block only governs CSS animation. Framer Motion animates via JS
+   and is unaffected — the layout wraps the tree in <MotionConfig
+   reducedMotion="user"> to cover that half. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }

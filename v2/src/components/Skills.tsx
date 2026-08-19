@@ -1,118 +1,101 @@
 "use client";
 
-import { Section } from "@/components/ui/Section";
+import { Section, SectionHeader } from "@/components/ui/Section";
 import { capabilities } from "@/data/portfolio";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-// Map capabilities to their relevant technology icons
-const capabilityIcons: { [key: string]: string[] } = {
-    'Frontend Engineering': [
-        '/assets/react.svg',
-        '/assets/vite.svg',
-        '/assets/javascript.svg',
-        '/assets/typescript.svg',
-        '/assets/html.svg',
-        '/assets/css.svg',
-        '/assets/Next.js.png',
+/** Tech logos shown per capability. Labels double as the image alt text. */
+const capabilityIcons: Record<string, { src: string; label: string }[]> = {
+    "Frontend Engineering": [
+        { src: "/assets/react.svg", label: "React" },
+        { src: "/assets/Next.js.png", label: "Next.js" },
+        { src: "/assets/typescript.svg", label: "TypeScript" },
+        { src: "/assets/javascript.svg", label: "JavaScript" },
+        { src: "/assets/vite.svg", label: "Vite" },
+        { src: "/assets/html.svg", label: "HTML" },
+        { src: "/assets/css.svg", label: "CSS" },
     ],
-    'Backend & API Development': [
-        '/assets/java.svg',
-        '/assets/python.svg',
-        '/assets/mysql.svg',
-        '/assets/typescript.svg',
-        '/assets/NestJS.png',
-        '/assets/Spring_Boot.png',
-        '/assets/FastAPI.png',
-        '/assets/Postgresql_elephant.svg.png',
+    "Backend & API Development": [
+        { src: "/assets/java.svg", label: "Java" },
+        { src: "/assets/Spring_Boot.png", label: "Spring Boot" },
+        { src: "/assets/NestJS.png", label: "NestJS" },
+        { src: "/assets/python.svg", label: "Python" },
+        { src: "/assets/FastAPI.png", label: "FastAPI" },
+        { src: "/assets/Postgresql_elephant.svg.png", label: "PostgreSQL" },
+        { src: "/assets/mysql.svg", label: "MySQL" },
     ],
-    'Cloud & Infrastructure': [
-        '/assets/aws.svg',
-        '/assets/gcloudconsole.svg',
-        '/assets/github.svg',
-        '/assets/firebase.png',
+    "Cloud & Infrastructure": [
+        { src: "/assets/aws.svg", label: "AWS" },
+        { src: "/assets/gcloudconsole.svg", label: "Google Cloud" },
+        { src: "/assets/firebase.png", label: "Firebase" },
+        { src: "/assets/github.svg", label: "GitHub" },
     ],
-    'DevOps & Automation': [
-        '/assets/github.svg',
-        '/assets/python.svg',
+    "DevOps & Automation": [
+        { src: "/assets/github.svg", label: "GitHub Actions" },
+        { src: "/assets/python.svg", label: "Python" },
     ],
 };
 
 export function Skills() {
     return (
         <Section id="capabilities">
-            <div className="w-full max-w-7xl">
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="mb-12 text-center"
-                >
-                    <h2 className="text-3xl md:text-5xl font-bold text-[#12B7C9] mb-4">Capabilities</h2>
-                    <p className="text-slate-400 max-w-2xl mx-auto">
-                        Technical skills and expertise across the full development stack
-                    </p>
-                </motion.div>
+            <SectionHeader
+                title="Capabilities"
+                lead="Technical skills and expertise across the full development stack."
+            />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {capabilities.map((cap, index) => {
-                         return (
-                            <motion.div
-                                key={cap.title}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className={cn(
-                                    "group relative p-6 rounded-2xl bg-gray-900/50 border border-white/5 hover:border-[#12B7C9]/30 transition-all duration-300",
-                                    "hover:bg-gray-900/80 hover:shadow-lg hover:shadow-[#12B7C9]/10",
-                                    index === 0 || index === 3 ? "lg:col-span-2" : "lg:col-span-2"
-                                )}
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#12B7C9]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
-                                
-                                <div className="mb-4 relative z-10">
-                                    <h3 className="text-xl font-bold text-white group-hover:text-[#12B7C9] transition-colors mb-2">
-                                        {cap.title}
-                                    </h3>
-                                    <p className="text-slate-400 text-sm mb-4">
-                                        {cap.description}
-                                    </p>
-                                    
-                                    {/* Technology Icons */}
-                                    {capabilityIcons[cap.title] && (
-                                        <div className="flex flex-wrap gap-3 mb-4">
-                                            {capabilityIcons[cap.title].map((iconPath, iconIdx) => (
-                                                <div 
-                                                    key={iconIdx}
-                                                    className="w-10 h-10 rounded-lg bg-gray-800 group-hover:bg-[#12B7C9]/20 transition-colors flex items-center justify-center p-2 border border-white/5 group-hover:border-[#12B7C9]/30"
-                                                >
-                                                    <Image 
-                                                        src={iconPath} 
-                                                        alt="" 
-                                                        width={24} 
-                                                        height={24} 
-                                                        className="object-contain"
-                                                    />
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
+            <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2">
+                {capabilities.map((cap, index) => (
+                    <motion.article
+                        key={cap.title}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.15 }}
+                        transition={{ delay: Math.min(index, 3) * 0.06, duration: 0.4 }}
+                        className="group flex h-full flex-col rounded-2xl border border-line bg-surface/60 p-5 transition-colors hover:border-accent/25 sm:p-6"
+                    >
+                        <h3 className="text-lg font-semibold text-foreground sm:text-xl">
+                            {cap.title}
+                        </h3>
+                        <p className="mt-2 text-sm text-muted">{cap.description}</p>
 
-                                <ul className="space-y-2 relative z-10">
-                                    {cap.items.map((item, i) => (
-                                        <li key={i} className="flex items-center text-sm text-slate-300">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-[#12B7C9]/50 mr-2 group-hover:bg-[#12B7C9] transition-colors" />
-                                            {item}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </motion.div>
-                        );
-                    })}
-                </div>
+                        {capabilityIcons[cap.title] && (
+                            <ul className="mt-5 flex flex-wrap gap-2">
+                                {capabilityIcons[cap.title].map((icon) => (
+                                    <li
+                                        key={icon.label}
+                                        title={icon.label}
+                                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-white/[0.03] p-1.5"
+                                    >
+                                        <Image
+                                            src={icon.src}
+                                            alt={icon.label}
+                                            width={20}
+                                            height={20}
+                                            className="h-full w-full object-contain"
+                                        />
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+
+                        <ul className="mt-5 space-y-2 border-t border-line pt-5">
+                            {cap.items.map((item) => (
+                                <li
+                                    key={item}
+                                    className="flex items-start gap-2.5 text-sm text-foreground/80"
+                                >
+                                    <span
+                                        aria-hidden
+                                        className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-accent/70"
+                                    />
+                                    <span className="min-w-0">{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.article>
+                ))}
             </div>
         </Section>
     );

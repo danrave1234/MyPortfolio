@@ -1,6 +1,10 @@
 export interface Project {
     title: string;
     subtitle: string;
+    /** Active period, e.g. "2026 — Present". Shown on the card. */
+    period?: string;
+    /** One verifiable outcome. Leave unset rather than inventing a metric. */
+    impact?: string;
     description: string;
     featured: boolean;
     category: string;
@@ -53,4 +57,19 @@ export interface Testimonial {
     company?: string;
     quote: string;
     relationship?: string;
+}
+
+export interface ExperienceRole {
+    title: string;
+    company: string;
+    period: string;
+    mode?: string;
+    highlights: string[];
+    tech?: string[];
+}
+
+export interface Certification {
+    name: string;
+    issuer?: string;
+    date: string;
 }

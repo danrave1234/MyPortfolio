@@ -68,11 +68,11 @@ export const projects: Project[] = [
     {
         title: "StudyBoost",
         subtitle: "Educational Platform",
-        period: "2025 — 2026",
-        impact: "Top contributor across an 8-developer team",
+        period: "2025 — Present",
+        impact: "Top contributor across an 8-person team, V1 through V2",
         featured: true,
         category: "Production System",
-        description: "A comprehensive educational platform built with Next.js frontend and Spring Boot backend, featuring OAuth authentication, admin dashboard, and Redis caching for optimal performance.",
+        description: "A comprehensive educational platform built with a Next.js frontend and Spring Boot backend, featuring OAuth authentication, an admin dashboard, and Redis caching. Still in active development, now on its second major version.",
         keyFeatures: [
             "OAuth authentication system",
             "Admin dashboard & management",

@@ -46,7 +46,7 @@ export interface Achievement {
 export interface Capability {
     title: string;
     description: string;
-    items: string[];
+    tools: { name: string; image: string }[];
 }
 
 export interface Testimonial {

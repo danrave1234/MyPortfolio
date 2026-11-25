@@ -675,6 +675,15 @@ export const achievements: Achievement[] = [
 
 export const capabilities: Capability[] = [
     {
+        title: 'Moodle Development & Testing',
+        description: 'PHP development and automated testing on the Moodle platform team.',
+        items: [
+            'PHP for Moodle development',
+            'PHPUnit for unit tests',
+            'Behat for acceptance tests',
+        ],
+    },
+    {
         title: 'Frontend Engineering',
         description: 'Responsive, production-ready interfaces in modern frameworks.',
         items: [
@@ -691,15 +700,25 @@ export const capabilities: Capability[] = [
         items: [
             'NestJS, Node.js, Spring Boot, Django',
             'REST API design & versioning',
-            'PostgreSQL, MySQL, MongoDB, SQLite',
-            'Supabase, Firebase, Redis caching',
             'Auth (JWT, OAuth2) & Stripe billing',
+        ],
+    },
+    {
+        title: 'Databases & Backend Services',
+        description: 'The data stores and hosted services behind my applications.',
+        items: [
+            'Supabase for storing draft and published sites in EstabWeb',
+            'Firebase Hosting and Storage for photography galleries',
+            'PostgreSQL, MySQL, MongoDB, SQLite',
+            'Redis caching',
         ],
     },
     {
         title: 'Cloud & DevOps',
         description: 'Deploying and operating cloud-native applications.',
         items: [
+            'Cloudflare Workers for the StudyBoost web and admin apps',
+            'Oracle Cloud',
             'AWS (EC2, S3, CloudFront)',
             'Azure & GCP (Cloud Functions, Storage)',
             'CI/CD with GitHub Actions',
@@ -709,10 +728,11 @@ export const capabilities: Capability[] = [
     },
     {
         title: 'AI & Automation',
-        description: 'Wiring models and workflow tools into real products.',
+        description: 'I build automated workflows and integrate AI models into applications.',
         items: [
+            'Microsoft Power Automate for workflow automation',
+            'UiPath and Activepieces',
             'OpenAI, Gemini, and Claude APIs',
-            'UiPath, Power Automate, Activepieces',
             'Background jobs & scheduled pipelines',
             'Python automation scripting',
         ],

@@ -19,13 +19,16 @@ const capabilityIcons: Record<string, { src: string; label: string }[]> = {
         { src: "/assets/NestJS.png", label: "NestJS" },
         { src: "/assets/python.svg", label: "Python" },
         { src: "/assets/FastAPI.png", label: "FastAPI" },
+    ],
+    "Databases & Backend Services": [
         { src: "/assets/Postgresql_elephant.svg.png", label: "PostgreSQL" },
         { src: "/assets/mysql.svg", label: "MySQL" },
+        { src: "/assets/firebase.png", label: "Firebase" },
     ],
     "Cloud & DevOps": [
         { src: "/assets/aws.svg", label: "AWS" },
         { src: "/assets/gcloudconsole.svg", label: "Google Cloud" },
-        { src: "/assets/firebase.png", label: "Firebase" },
+        { src: "/assets/oraclecloud.svg", label: "Oracle Cloud" },
         { src: "/assets/github.svg", label: "GitHub" },
     ],
     "AI & Automation": [
@@ -36,10 +39,7 @@ const capabilityIcons: Record<string, { src: string; label: string }[]> = {
 export function Skills() {
     return (
         <Section id="capabilities">
-            <SectionHeader
-                title="Capabilities"
-                lead="Technical skills and expertise across the full development stack."
-            />
+            <SectionHeader title="Technical skills" />
 
             <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2">
                 {capabilities.map((cap) => (

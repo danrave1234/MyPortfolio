@@ -11,6 +11,7 @@ export function Experience() {
             <aside aria-labelledby="current-work" className="mb-8 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-l-2 border-accent bg-surface px-4 py-3 sm:mb-10">
                 <p className="text-sm font-semibold text-accent">Current work</p>
                 <h3 id="current-work" className="text-xl font-bold text-foreground">Moodle platform team</h3>
+                <p className="w-full text-sm text-muted">I work in PHP and test Moodle changes with PHPUnit and Behat.</p>
             </aside>
 
             <ol className="relative space-y-8 sm:space-y-10">

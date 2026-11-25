@@ -1,8 +1,8 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { resumePath } from "@/lib/site";
 
@@ -18,6 +18,33 @@ const sections = [
 export function Navbar() {
     const pathname = usePathname();
     const [activeSection, setActiveSection] = useState("");
+    const menuRef = useRef<HTMLDetailsElement>(null);
+
+    useEffect(() => {
+        const menu = menuRef.current;
+        if (!menu) return;
+        const close = () => { menu.open = false; };
+        const outside = (event: PointerEvent) => {
+            if (event.target instanceof Node && !menu.contains(event.target)) close();
+        };
+        const escape = (event: KeyboardEvent) => {
+            if (menu.open && event.key === "Escape") {
+                close();
+                menu.querySelector("summary")?.focus({ preventScroll: true });
+            }
+        };
+        const desktop = window.matchMedia("(min-width: 64rem)");
+        desktop.addEventListener("change", close);
+        document.addEventListener("pointerdown", outside);
+        document.addEventListener("keydown", escape);
+        window.addEventListener("pageshow", close);
+        return () => {
+            desktop.removeEventListener("change", close);
+            document.removeEventListener("pointerdown", outside);
+            document.removeEventListener("keydown", escape);
+            window.removeEventListener("pageshow", close);
+        };
+    }, []);
 
     useEffect(() => {
         if (pathname !== "/" || typeof IntersectionObserver === "undefined") return;
@@ -51,26 +78,46 @@ export function Navbar() {
         };
     }, [pathname]);
 
+    const sectionLinks = sections.map(({ id, label }) => (
+        <a key={id} href={`/#${id}`} className="site-nav-link"
+            aria-current={(pathname.startsWith("/work/") ? id === "projects" : pathname === "/" && activeSection === id) ? "location" : undefined}
+        >
+            {label}
+        </a>
+    ));
+    const resumeLink = <a href={resumePath} target="_blank" rel="noopener noreferrer" className="editorial-link">
+        Résumé <ArrowUpRight aria-hidden className="h-4 w-4" />
+    </a>;
+
     return (
-        <header id="top" className="site-header">
+        <header className="site-header">
             <div className="site-header-inner mx-auto max-w-6xl">
                 <BrandLogo />
-                <nav aria-label="Section navigation" className="site-nav">
-                    {sections.map(({ id, label }) => (
-                        <a
-                            key={id}
-                            href={`/#${id}`}
-                            aria-current={(pathname.startsWith("/work/") ? id === "projects" : pathname === "/" && activeSection === id) ? "location" : undefined}
-                            className="site-nav-link"
-                        >
-                            <span>{label}</span>
-                        </a>
-                    ))}
-                </nav>
-                <a href={resumePath} target="_blank" rel="noopener noreferrer" className="editorial-link col-start-2 row-start-1 justify-self-end">
-                    Résumé <ArrowUpRight aria-hidden className="h-4 w-4" />
-                </a>
+                <nav aria-label="Section navigation" className="site-nav">{sectionLinks}</nav>
+                <div className="desktop-resume">{resumeLink}</div>
+                <details className="mobile-menu" ref={menuRef}
+                    onBlur={(event) => {
+                        if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false;
+                    }}
+                >
+                    <summary aria-controls="mobile-navigation">
+                        <span className="menu-closed">Menu</span><Menu className="menu-closed" aria-hidden />
+                        <span className="menu-open">Close</span><X className="menu-open" aria-hidden />
+                    </summary>
+                    <nav id="mobile-navigation" aria-label="Section navigation" className="mobile-navigation"
+                        onClick={(event) => {
+                            const link = event.target instanceof Element ? event.target.closest("a") : null;
+                            if (!link || !menuRef.current || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                            menuRef.current.open = false;
+                            if (link.target === "_blank") menuRef.current.querySelector("summary")?.focus({ preventScroll: true });
+                        }}
+                    >
+                        {sectionLinks}
+                        {resumeLink}
+                    </nav>
+                </details>
             </div>
+            <noscript><style>{'@media (max-width: 63.999rem) { .site-header { position: relative; } }'}</style></noscript>
         </header>
     );
 }

@@ -7,7 +7,7 @@ export function Section({
     ...props
 }: ComponentPropsWithoutRef<"section">) {
     return (
-        <section className={cn("content-section", className)} {...props}>
+        <section tabIndex={-1} className={cn("content-section", className)} {...props}>
             <div className="mx-auto w-full max-w-6xl">{children}</div>
         </section>
     );
@@ -28,7 +28,7 @@ export function SectionHeader({
     return (
         <div
             className={cn(
-                "mb-7 sm:mb-9",
+                "section-heading mb-7 sm:mb-9",
                 align === "center" && "text-center mx-auto max-w-2xl",
                 className
             )}

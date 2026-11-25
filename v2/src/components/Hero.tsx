@@ -10,14 +10,14 @@ export function Hero() {
                 <span>Full-stack &amp; cloud developer</span>
                 <span>Cebu City, Philippines</span>
             </div>
-            <h1 className="text-display">Danrave C. Keh</h1>
             <div className="hero-intro">
-                <div>
+                <h1 className="text-display">Danrave C. Keh</h1>
+                <div className="hero-summary">
                     <p className="hero-copy">
                         I’m part of the Moodle platform team. I work on ferry booking systems
                         at {hayahai.name} and build tools for small businesses.
                     </p>
-                    <div className="mt-6 flex flex-wrap gap-x-6">
+                    <div className="hero-actions">
                         <a href="#projects" className="editorial-link">
                             View my work <ArrowDownRight aria-hidden className="h-4 w-4" />
                         </a>

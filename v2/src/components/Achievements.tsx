@@ -8,6 +8,7 @@ import { ExternalLink, Trophy } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { AdaptiveDetails } from "@/components/ui/AdaptiveDetails";
 
 export function Achievements() {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -20,7 +21,7 @@ export function Achievements() {
                 lead="Competitions, recognition, and certifications."
             />
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+            <div className="award-grid grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
                 {achievements.map((achievement, index) => (
                     <article
                         key={achievement.title}
@@ -85,32 +86,31 @@ export function Achievements() {
             {/* Certifications: a dense list rather than more cards — they are
                 credentials, not stories, and this keeps the section short on a
                 phone. */}
-            <div className="mt-12 sm:mt-16">
-                <h3 className="text-sm font-semibold uppercase tracking-wide text-foreground">
-                    Certifications
-                </h3>
-                <ul className="mt-4 divide-y divide-[var(--line)] rounded-2xl border border-line bg-surface/40">
-                    {certifications.map((cert) => (
-                        <li
-                            key={cert.name}
-                            className="flex flex-col gap-1 p-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
-                        >
-                            <div className="min-w-0">
-                                <span className="block text-sm font-medium text-foreground">
-                                    {cert.name}
-                                </span>
-                                {cert.issuer && (
-                                    <span className="mt-0.5 block text-xs text-dim">
-                                        {cert.issuer}
+            <div className="mt-5 border-t border-line-strong md:mt-12">
+                <AdaptiveDetails label="Certifications" heading>
+                    <ul className="mt-4 divide-y divide-[var(--line)] rounded-2xl border border-line bg-surface/40">
+                        {certifications.map((cert) => (
+                            <li
+                                key={cert.name}
+                                className="flex flex-col gap-1 p-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+                            >
+                                <div className="min-w-0">
+                                    <span className="block text-sm font-medium text-foreground">
+                                        {cert.name}
                                     </span>
-                                )}
-                            </div>
-                            <span className="shrink-0 font-mono text-xs text-muted">
-                                {cert.date}
-                            </span>
-                        </li>
-                    ))}
-                </ul>
+                                    {cert.issuer && (
+                                        <span className="mt-0.5 block text-xs text-dim">
+                                            {cert.issuer}
+                                        </span>
+                                    )}
+                                </div>
+                                <span className="shrink-0 font-mono text-xs text-muted">
+                                    {cert.date}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                </AdaptiveDetails>
             </div>
 
             <Modal

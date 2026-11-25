@@ -1,5 +1,6 @@
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { experience } from "@/data/portfolio";
+import { AdaptiveDetails } from "@/components/ui/AdaptiveDetails";
 
 export function Experience() {
     return (
@@ -43,33 +44,35 @@ export function Experience() {
                             )}
                         </p>
 
-                        <ul className="mt-4 space-y-2">
-                            {role.highlights.map((h) => (
-                                <li
-                                    key={h}
-                                    className="flex items-start gap-2.5 text-sm leading-relaxed text-muted"
-                                >
-                                    <span
-                                        aria-hidden
-                                        className="mt-[0.5rem] h-1 w-1 shrink-0 rounded-full bg-accent/70"
-                                    />
-                                    <span className="min-w-0">{h}</span>
-                                </li>
-                            ))}
-                        </ul>
-
-                        {role.tech && (
-                            <ul className="mt-4 flex flex-wrap gap-1.5">
-                                {role.tech.map((t) => (
+                        <AdaptiveDetails label="Responsibilities and tools">
+                            <ul className="space-y-2">
+                                {role.highlights.map((h) => (
                                     <li
-                                        key={t}
-                                        className="border border-line px-2 py-1 font-mono text-xs text-muted"
+                                        key={h}
+                                        className="flex items-start gap-2.5 text-sm leading-relaxed text-muted"
                                     >
-                                        {t}
+                                        <span
+                                            aria-hidden
+                                            className="mt-[0.5rem] h-1 w-1 shrink-0 rounded-full bg-accent/70"
+                                        />
+                                        <span className="min-w-0">{h}</span>
                                     </li>
                                 ))}
                             </ul>
-                        )}
+
+                            {role.tech && (
+                                <ul className="mt-4 flex flex-wrap gap-1.5">
+                                    {role.tech.map((t) => (
+                                        <li
+                                            key={t}
+                                            className="border border-line px-2 py-1 font-mono text-xs text-muted"
+                                        >
+                                            {t}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </AdaptiveDetails>
                     </li>
                 ))}
             </ol>

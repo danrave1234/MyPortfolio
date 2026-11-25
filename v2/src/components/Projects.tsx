@@ -27,7 +27,7 @@ function ProjectCard({ project, lead = false, onOpen }: {
                     fetchPriority={lead ? "high" : undefined}
                     sizes={lead
                         ? "(min-width: 768px) 60vw, 100vw"
-                        : "(min-width: 1280px) 560px, (min-width: 768px) 50vw, 100vw"}
+                        : "(min-width: 1280px) 560px, (min-width: 768px) 50vw, 22vw"}
                     className="object-contain"
                 />
             </div>
@@ -36,8 +36,8 @@ function ProjectCard({ project, lead = false, onOpen }: {
                     {project.category}{project.period && ` · ${project.period}`}
                 </p>
                 <h3 className="work-title"><ProjectName project={project} /></h3>
-                <p className="mt-1 font-medium text-foreground">{project.subtitle}</p>
-                <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted">{project.description}</p>
+                <p className="work-subtitle mt-1 font-medium text-foreground">{project.subtitle}</p>
+                <p className="work-description mt-3 line-clamp-3 text-sm leading-relaxed text-muted">{project.description}</p>
                 <a
                     href={`/work/${projectSlug(project.title)}`}
                     aria-haspopup="dialog"

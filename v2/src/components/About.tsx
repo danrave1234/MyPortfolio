@@ -1,6 +1,7 @@
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { testimonials } from "@/data/portfolio";
 import { hayahai } from "@/lib/site";
+import { AdaptiveDetails } from "@/components/ui/AdaptiveDetails";
 
 export function About() {
     return (
@@ -52,45 +53,41 @@ export function About() {
                 </dl>
             </div>
 
-            <div className="mt-16 sm:mt-20">
-                <h3 className="text-xl font-semibold text-foreground sm:text-2xl">
-                    Testimonials
-                </h3>
-                <p className="mt-2 text-sm text-muted sm:text-base">
-                    What partners and stakeholders say about working together.
-                </p>
+            <div className="mt-6 border-t border-line-strong md:mt-16">
+                <AdaptiveDetails label="Testimonials" heading>
 
-                <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-                    {testimonials.map((t) => (
-                        <figure
-                            key={t.name}
-                            className="flex h-full flex-col border-t border-line-strong py-4 sm:pr-4"
-                        >
-                            <blockquote className="flex-1 text-sm leading-relaxed text-foreground/85 sm:text-[0.95rem]">
-                                {t.quote}
-                            </blockquote>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                        {testimonials.map((t) => (
+                            <figure
+                                key={t.name}
+                                className="flex h-full flex-col border-t border-line-strong py-4 sm:pr-4"
+                            >
+                                <blockquote className="flex-1 text-sm leading-relaxed text-foreground/85 sm:text-[0.95rem]">
+                                    {t.quote}
+                                </blockquote>
 
-                            <figcaption className="mt-5 flex items-start gap-3 border-t border-line pt-4">
-                                <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-line bg-surface text-sm font-semibold text-accent">
-                                    {t.name
-                                        .split(" ")
-                                        .map((n) => n[0])
-                                        .join("")
-                                        .slice(0, 2)}
-                                </span>
-                                <span className="min-w-0">
-                                    <span className="block text-sm font-semibold text-foreground">
-                                        {t.name}
+                                <figcaption className="mt-5 flex items-start gap-3 border-t border-line pt-4">
+                                    <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-line bg-surface text-sm font-semibold text-accent">
+                                        {t.name
+                                            .split(" ")
+                                            .map((n) => n[0])
+                                            .join("")
+                                            .slice(0, 2)}
                                     </span>
-                                    <span className="block text-xs text-dim">
-                                        {t.role}
-                                        {t.company ? ` · ${t.company}` : ""}
+                                    <span className="min-w-0">
+                                        <span className="block text-sm font-semibold text-foreground">
+                                            {t.name}
+                                        </span>
+                                        <span className="block text-xs text-dim">
+                                            {t.role}
+                                            {t.company ? ` · ${t.company}` : ""}
+                                        </span>
                                     </span>
-                                </span>
-                            </figcaption>
-                        </figure>
-                    ))}
-                </div>
+                                </figcaption>
+                            </figure>
+                        ))}
+                    </div>
+                </AdaptiveDetails>
             </div>
         </Section>
     );

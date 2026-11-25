@@ -44,6 +44,7 @@ export interface Achievement {
 }
 
 export interface Capability {
+    id?: string;
     title: string;
     description: string;
     tools: { name: string; image: string }[];

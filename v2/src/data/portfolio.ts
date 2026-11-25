@@ -779,6 +779,19 @@ export const capabilities: Capability[] = [
             { name: "Wireshark", image: "/assets/skills/wireshark.webp" },
         ],
     },
+    {
+        id: "development-workflow",
+        title: "Development Workflow",
+        description: "Git and GitHub for version control and code review, Jira and ClickUp for task tracking, and Ubuntu on Windows Subsystem for Linux (WSL 2) for local development.",
+        tools: [
+            { name: "Git", image: "/assets/skills/git.webp" },
+            { name: "GitHub", image: "/assets/github.svg" },
+            { name: "Jira", image: "/assets/skills/jira.webp" },
+            { name: "ClickUp", image: "/assets/skills/clickup.webp" },
+            { name: "WSL 2", image: "/assets/skills/wsl.webp" },
+            { name: "Ubuntu", image: "/assets/skills/ubuntu.webp" },
+        ],
+    },
 ];
 
 export const testimonials: Testimonial[] = [

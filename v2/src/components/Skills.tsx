@@ -7,8 +7,8 @@ export function Skills() {
         <Section id="capabilities">
             <SectionHeader title="Technical skills" />
             <div className="grid grid-cols-1 gap-x-8 gap-y-5 md:grid-cols-2">
-                {capabilities.map(({ title, description, tools }) => (
-                    <article key={title} className="min-w-0 border-t border-line-strong py-4">
+                {capabilities.map(({ id, title, description, tools }) => (
+                    <article key={title} id={id} className="min-w-0 border-t border-line-strong py-4 md:last:odd:col-span-2">
                         <h3 className="text-lg font-semibold text-foreground sm:text-xl">{title}</h3>
                         <p className="mt-2 text-sm leading-relaxed text-muted">{description}</p>
                         <ul className="mt-4 grid grid-cols-[repeat(auto-fill,minmax(min(100%,8.25rem),1fr))] gap-x-3 gap-y-3">

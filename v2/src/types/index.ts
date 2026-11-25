@@ -1,12 +1,16 @@
 export interface Project {
     title: string;
+    logo?: string;
+    relatedProject: string;
     subtitle: string;
     /** Active period, e.g. "2026 — Present". Shown on the card. */
     period?: string;
     /** One verifiable outcome. Leave unset rather than inventing a metric. */
     impact?: string;
     description: string;
-    featured: boolean;
+    repository?: string;
+    listing?: string;
+    imageCaptions?: string[];
     category: string;
     keyFeatures: string[];
     tech: string[];
@@ -43,12 +47,6 @@ export interface Capability {
     title: string;
     description: string;
     items: string[];
-}
-
-export interface NavItem {
-    label: string;
-    href: string;
-    shortcut?: string;
 }
 
 export interface Testimonial {

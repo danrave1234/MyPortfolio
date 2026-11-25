@@ -1,25 +1,22 @@
-"use client";
-
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { experience } from "@/data/portfolio";
-import { motion } from "framer-motion";
 
 export function Experience() {
     return (
         <Section id="experience">
             <SectionHeader
                 title="Experience"
-                lead="Where I have shipped, and what I owned."
             />
 
+            <aside aria-labelledby="current-work" className="mb-8 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-l-2 border-accent bg-surface px-4 py-3 sm:mb-10">
+                <p className="text-sm font-semibold text-accent">Current work</p>
+                <h3 id="current-work" className="text-xl font-bold text-foreground">Moodle platform team</h3>
+            </aside>
+
             <ol className="relative space-y-8 sm:space-y-10">
-                {experience.map((role, index) => (
-                    <motion.li
+                {experience.map((role) => (
+                    <li
                         key={`${role.company}-${role.title}`}
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.15 }}
-                        transition={{ delay: Math.min(index, 3) * 0.06, duration: 0.4 }}
                         // The timeline rail is drawn with a left border rather than
                         // absolutely positioned dots, so it can never drift out of
                         // alignment as the text reflows on narrow screens.
@@ -66,14 +63,14 @@ export function Experience() {
                                 {role.tech.map((t) => (
                                     <li
                                         key={t}
-                                        className="rounded-md border border-line bg-white/[0.03] px-2 py-1 text-xs text-muted"
+                                        className="border border-line px-2 py-1 font-mono text-xs text-muted"
                                     >
                                         {t}
                                     </li>
                                 ))}
                             </ul>
                         )}
-                    </motion.li>
+                    </li>
                 ))}
             </ol>
         </Section>

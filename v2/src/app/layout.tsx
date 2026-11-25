@@ -1,11 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Geist_Mono } from "next/font/google";
+import { Manrope, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
-import { ActiveSectionProvider } from "@/components/ActiveSectionProvider";
-import { Background } from "@/components/Background";
-import { MotionProvider } from "@/components/MotionProvider";
-import { StructuredData } from "@/components/StructuredData";
+import { Navbar } from "@/components/Navbar";
+import { siteDescription, siteTitle, siteUrl } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -16,6 +14,14 @@ const manrope = Manrope({
 });
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  preload: false,
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  weight: "400",
+  variable: "--font-instrument-serif",
   subsets: ["latin"],
   display: "swap",
 });
@@ -23,40 +29,22 @@ const geistMono = Geist_Mono({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  // Never trap users at 1x — pinch-zoom is an accessibility requirement.
-  maximumScale: 5,
-  themeColor: "#08090b",
-  colorScheme: "dark",
+  themeColor: "#f5f1e8",
+  colorScheme: "light",
   // Let the page paint under the notch / home indicator; components pad
   // themselves with env(safe-area-inset-*).
   viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
-  // Required for Next.js to turn the relative OG/Twitter image paths into
-  // absolute URLs. Without it they resolve against localhost in production.
-  metadataBase: new URL("https://www.danravekeh.com"),
-  title: "Danrave C. Keh | Full Stack & Cloud Developer",
-  description:
-    "Danrave C. Keh - CS Graduate, Full Stack Engineer & SaaS Founder. Building production systems and cloud-native applications.",
-  keywords: [
-    "Full Stack Developer",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Node.js",
-    "Cloud",
-    "Vercel",
-    "Neon PostgreSQL",
-    "Tailwind",
-    "Danrave Keh",
-  ],
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
   authors: [{ name: "Danrave C. Keh" }],
   applicationName: "Danrave C. Keh Portfolio",
   openGraph: {
-    title: "Danrave C. Keh | Full Stack & Cloud Developer",
-    description:
-      "Danrave C. Keh - CS Graduate, Full Stack Engineer & SaaS Founder. Building production systems and cloud-native applications.",
+    title: siteTitle,
+    description: siteDescription,
     url: "/",
     siteName: "Danrave C. Keh Portfolio",
     images: [
@@ -67,15 +55,14 @@ export const metadata: Metadata = {
         alt: "Danrave C. Keh — Full Stack & Cloud Developer",
       },
     ],
-    locale: "en_US",
+    locale: "en_PH",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Danrave C. Keh | Full Stack & Cloud Developer",
-    description:
-      "Danrave C. Keh - CS Graduate, Full Stack Engineer & SaaS Founder. Building production systems and cloud-native applications.",
-    images: ["/assets/og-image.png"],
+    title: siteTitle,
+    description: siteDescription,
+    images: [{ url: "/assets/og-image.png", alt: siteTitle }],
   },
 };
 
@@ -85,30 +72,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
-        className={`${manrope.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${manrope.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased bg-background text-foreground`}
       >
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:font-semibold focus:text-[#04191c]"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:font-semibold focus:text-white"
         >
           Skip to content
         </a>
 
-        <StructuredData />
-        <Background />
-
-        <MotionProvider>
-          <ActiveSectionProvider>
-            <div className="relative flex min-h-[100svh] flex-col">
-              <main id="main" className="flex-1">
-                {children}
-              </main>
-              <Footer />
-            </div>
-          </ActiveSectionProvider>
-        </MotionProvider>
+        <Navbar />
+        <div className="site-content relative flex flex-col">
+          <main id="main" tabIndex={-1} className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </div>
 
         <Analytics />
         <SpeedInsights />

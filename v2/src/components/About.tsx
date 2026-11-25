@@ -1,8 +1,6 @@
-"use client";
-
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { testimonials } from "@/data/portfolio";
-import { motion } from "framer-motion";
+import { hayahai } from "@/lib/site";
 
 export function About() {
     return (
@@ -13,14 +11,15 @@ export function About() {
                 <div className="text-body space-y-5 text-muted">
                     <p>
                         I&apos;m an Information Technology graduate from Cebu Institute of
-                        Technology University, now a software developer consultant at
-                        Oltek Solutions Corp. I build real production systems, not demo
-                        apps — frontend, backend, cloud infrastructure, deployment
-                        pipelines, and the performance work in between.
+                        Technology University and a software developer consultant at{" "}
+                        <a href={hayahai.url} className="text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+                            {hayahai.name}
+                        </a>
+                        . I work on the booking pages passengers use to reserve ferry trips
+                        and the tools port staff use to issue tickets.
                     </p>
                     <p>
-                        I&apos;ve shipped deployed systems used by real people — including my
-                        own SaaS platform,{" "}
+                        I also founded{" "}
                         <a
                             href="https://estabweb.com"
                             target="_blank"
@@ -29,22 +28,20 @@ export function About() {
                         >
                             EstabWeb
                         </a>
-                        , which lets small businesses launch a managed website in a day or
-                        two. The approach is the same every time: build fast, build
-                        reliably, and deploy so it doesn&apos;t break in the real world.
+                        , where small businesses edit and publish a managed website on their own domain.
                     </p>
                 </div>
 
-                <dl className="grid grid-cols-2 gap-3 self-start sm:gap-4">
+                <dl className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,max(8rem,35%)),1fr))] gap-3 self-start sm:gap-4">
                     {[
-                        { k: "Shipped to production", v: "8+ systems" },
+                        { k: "Education", v: "BS Information Technology" },
                         { k: "PromptQuest 2025", v: "Champion" },
                         { k: "Capstone", v: "Top 12 of 60+" },
-                        { k: "Currently", v: "Oltek Solutions" },
+                        { k: "Consulting at", v: hayahai.name },
                     ].map((stat) => (
                         <div
                             key={stat.k}
-                            className="rounded-xl border border-line bg-white/[0.02] p-4"
+                            className="border-t border-line py-3"
                         >
                             <dt className="text-xs uppercase tracking-wide text-dim">
                                 {stat.k}
@@ -64,21 +61,17 @@ export function About() {
                 </p>
 
                 <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-                    {testimonials.map((t, index) => (
-                        <motion.figure
+                    {testimonials.map((t) => (
+                        <figure
                             key={t.name}
-                            initial={{ opacity: 0, y: 12 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.2 }}
-                            transition={{ delay: index * 0.06, duration: 0.4 }}
-                            className="flex h-full flex-col rounded-2xl border border-line bg-surface/60 p-5 transition-colors hover:border-accent/25 sm:p-6"
+                            className="flex h-full flex-col border-t border-line-strong py-4 sm:pr-4"
                         >
                             <blockquote className="flex-1 text-sm leading-relaxed text-foreground/85 sm:text-[0.95rem]">
                                 {t.quote}
                             </blockquote>
 
                             <figcaption className="mt-5 flex items-start gap-3 border-t border-line pt-4">
-                                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-accent/25 bg-accent/10 text-sm font-semibold text-accent">
+                                <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-line bg-surface text-sm font-semibold text-accent">
                                     {t.name
                                         .split(" ")
                                         .map((n) => n[0])
@@ -95,7 +88,7 @@ export function About() {
                                     </span>
                                 </span>
                             </figcaption>
-                        </motion.figure>
+                        </figure>
                     ))}
                 </div>
             </div>

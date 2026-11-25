@@ -4,7 +4,6 @@ import { Section, SectionHeader } from "@/components/ui/Section";
 import { Modal } from "@/components/ui/Modal";
 import { Gallery } from "@/components/ui/Gallery";
 import { achievements, certifications } from "@/data/portfolio";
-import { motion } from "framer-motion";
 import { ExternalLink, Trophy } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
@@ -23,24 +22,24 @@ export function Achievements() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
                 {achievements.map((achievement, index) => (
-                    <motion.article
+                    <article
                         key={achievement.title}
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.15 }}
-                        transition={{ delay: Math.min(index, 3) * 0.06, duration: 0.4 }}
                         className={cn(
-                            "group flex flex-col overflow-hidden rounded-2xl border bg-surface/60 transition-colors",
+                            "group flex flex-col overflow-hidden border bg-surface transition-colors",
                             achievement.isChampion
                                 ? "border-accent/40"
                                 : "border-line hover:border-accent/25"
                         )}
                     >
                         <button
-                            onClick={() => setOpenIndex(index)}
+                            type="button"
+                            onClick={(event) => {
+                                event.currentTarget.focus({ preventScroll: true });
+                                setOpenIndex(index);
+                            }}
                             className="flex flex-1 flex-col text-left"
                         >
-                            <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-black">
+                            <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-surface-hi">
                                 {achievement.images[0] && (
                                     <Image
                                         src={achievement.images[0]}
@@ -51,7 +50,7 @@ export function Achievements() {
                                     />
                                 )}
                                 {achievement.isChampion && (
-                                    <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 text-xs font-bold text-[#04191c]">
+                                    <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 text-xs font-bold text-white">
                                         <Trophy className="h-3 w-3" />
                                         Champion
                                     </span>
@@ -79,7 +78,7 @@ export function Achievements() {
                                 </p>
                             </div>
                         </button>
-                    </motion.article>
+                    </article>
                 ))}
             </div>
 

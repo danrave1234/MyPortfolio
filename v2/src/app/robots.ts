@@ -1,11 +1,9 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
+import { siteUrl } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-    },
-    sitemap: 'https://www.danravekeh.com/sitemap.xml',
-  }
+    return {
+        rules: { userAgent: "*", allow: "/" },
+        sitemap: siteUrl + "/sitemap.xml",
+    };
 }

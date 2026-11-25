@@ -1,12 +1,13 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
+import { projects } from "@/data/portfolio";
+import { projectSlug, siteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: 'https://www.danravekeh.com',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 1,
-    },
-  ]
+    return [
+        { url: siteUrl + "/" },
+        ...projects.map(({ title, images }) => ({
+            url: `${siteUrl}/work/${projectSlug(title)}`,
+            images: images.map((image) => siteUrl + image),
+        })),
+    ];
 }
